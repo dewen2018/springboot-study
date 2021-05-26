@@ -17,9 +17,9 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public JSONObject validationError(MethodArgumentNotValidException ex) {
         FieldError fieldError = ex.getBindingResult().getFieldError();
-        log.error(fieldError.getField()+fieldError.getDefaultMessage());
+        log.error(fieldError.getField() + fieldError.getDefaultMessage());
         JSONObject res = new JSONObject();
-        res.put("9999",fieldError.getField()+fieldError.getDefaultMessage());
+        res.put("9999", fieldError.getField() + fieldError.getDefaultMessage());
         return res;
     }
 }

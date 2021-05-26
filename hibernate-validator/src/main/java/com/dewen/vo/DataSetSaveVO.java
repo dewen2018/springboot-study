@@ -42,6 +42,6 @@ public class DataSetSaveVO {
     @NotNull(message = " 字段不能为空")
     private String sex;
 
-    @Size(min = 3,max = 100,message = "Collection size must between 3~100")
+    @Size(min = 3, max = 100, message = "Collection size must between 3~100")
     private List<String> names;
 }
