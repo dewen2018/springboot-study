@@ -1,5 +1,6 @@
 package com.dewen.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dewen.vo.DataSetSaveVO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,7 @@ import javax.validation.Valid;
 public class DewenController {
 
     @PostMapping("/createDataSet")
-    public String createDataSet(@Valid @RequestBody DataSetSaveVO dataSetVO) {
-        return "hello,hibernate...";
+    public JSONObject createDataSet(@Valid @RequestBody DataSetSaveVO dataSetVO) {
+        return new JSONObject();
     }
 }

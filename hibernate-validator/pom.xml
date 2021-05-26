@@ -28,15 +28,31 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.4.Final</version>
+        </dependency>-->
+        <!--SpringBoot2.3.x 以前 如果按照 SpringBoot 的方式引入了 spring-boot-starter-web，则不需要特意引入 spring-boot-starter-validation
+            SpringBoot2.3.x 以后需要显引入SpringBoot2.3.x 以前 如果按照 SpringBoot 的方式引入了 spring-boot-starter-web，则不需要特意引入 spring-boot-starter-validation
+            SpringBoot2.3.x 以后需要显引入-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.41</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
