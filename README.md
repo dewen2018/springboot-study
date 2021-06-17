@@ -4,3 +4,7 @@
 	以便提供本机部署选项，通常设计为打包在轻量级容器中。
 2.hibernate-validator
 	Springboot优雅的进行字段校验
+3.activiti
+	springboot activiti
+4.qyweixinmsgsend
+	对接企业微信发送应用消息
