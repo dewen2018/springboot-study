@@ -14,8 +14,8 @@ public class Util {
     private static final String chatid = "wrHKTcDwAAcaVf3oSmrkYxkmIPRydbnw";
     private static final String token = "yVdyT0hYViH5_ywj0TNp2CDdrKM6GiaQZVku57JSrATIDntFg8f-njWgekJKj0XRCtF_1ANS0qzuB4QPEfGOsS0bw9kPNjpRHqRtNCbSCMJVP4axvtQK_qckaYWs2Rl9qjmJrXJXYMbafd_TygKEdedfR465qwOE2nXyE0NjBsIlWESsfMAg8HjA2wnORNHIf_sVABhZLxVv1uT3cW9lQg";
 
-    private static final String corpId = "yourcorpId";
-    private static final String corpsecret = "yourcorpsecret";
+    private static final String corpId = "wwd769544d44427805";
+    private static final String corpsecret = "O3jsCFdVtW4VAluRahzNbRPM_zKolCPJE8XuksJqNtE";
     // 获取token
     private static final String getTokenUrl = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&corpsecret=%s";
     //读取成员信息

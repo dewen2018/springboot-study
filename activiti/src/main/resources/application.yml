@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost:3306/dewen_activiti?nullCatalogMeansCurrent=true&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true
+  activiti:
+    database-schema-update: true
+    history-level: full
+    db-history-used: true
+
+
+debug: true
