@@ -8,3 +8,4 @@
 	springboot activiti
 4.qyweixinmsgsend
 	对接企业微信发送应用消息
+5.websocket跨域测试
