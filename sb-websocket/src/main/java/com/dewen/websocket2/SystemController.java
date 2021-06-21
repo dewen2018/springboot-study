@@ -14,6 +14,12 @@ import java.util.Map;
 @Controller("web_Scoket_system")
 @RequestMapping("/api/socket")
 public class SystemController {
+    @GetMapping("/socket")
+    public ModelAndView socketT() {
+        ModelAndView mav = new ModelAndView("/socket");
+        return mav;
+    }
+
     //页面请求
     @GetMapping("/index/{userId}")
     public ModelAndView socket(@PathVariable String userId) {

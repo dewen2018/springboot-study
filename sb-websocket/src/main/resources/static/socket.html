@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+</body>
+<script>
+    // var socket = io.connect("ws://47.119.141.236:8085/api/websoket/msgQueue");
+    var socket = io.connect("ws://dewen.free.idcfengye.com/api/websoket/msgQueue");
+    socket.on("connect", function () {
+      console.log("成功连接");
+    });
+</script>
+
+</html>

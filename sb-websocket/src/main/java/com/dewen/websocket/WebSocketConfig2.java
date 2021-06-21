@@ -25,7 +25,7 @@
 //    @Override
 //    public void registerStompEndpoints(StompEndpointRegistry registry) {//注册STOMP协议的节点(endpoint),并映射的指定的URL
 ////        registry.addEndpoint("/webServer").withSockJS();
-//        registry.addEndpoint("/api/interfaceAutoTopicServer").setAllowedOrigins("*").withSockJS();//注册两个STOMP的endpoint，分别用于广播和点对点
+//        registry.addEndpoint("/api/websocket").setAllowedOrigins("*").withSockJS();//注册两个STOMP的endpoint，分别用于广播和点对点
 //        registry.addEndpoint("/logserver").withSockJS();//注册一个STOMP的endpoint,并指定使用SockJS协议
 //        //registry.addEndpoint("/hello").setAllowedOrigins("*").withSokJS();
 //        //这个和客户端创建连接时的url有关，其中setAllowedOrigins()方法表示允许连接的域名，withSockJS()方法表示支持以SockJS方式连接服务器。

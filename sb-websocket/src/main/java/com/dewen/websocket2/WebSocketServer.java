@@ -22,7 +22,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Component
 @Slf4j
 @Service
-@ServerEndpoint("/api/websocket/{sid}")
+@ServerEndpoint("/api/websoket/msgQueue")
 public class WebSocketServer {
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
@@ -39,7 +39,7 @@ public class WebSocketServer {
      * 连接建立成功调用的方法
      */
     @OnOpen
-    public void onOpen(Session session, @PathParam("sid") String sid) {
+    public void onOpen(Session session) {
         this.session = session;
         webSocketSet.add(this);
         this.sid = sid;
