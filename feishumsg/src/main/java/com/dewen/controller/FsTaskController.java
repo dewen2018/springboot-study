@@ -1,9 +1,12 @@
 package com.dewen.controller;
 
 
+import com.dewen.service.IFsTaskService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -17,4 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/fs-task")
 public class FsTaskController {
 
+    @Resource
+    private IFsTaskService fsTaskServiceImpl;
+
+    @GetMapping("/synFsTask")
+    public void synFsTask() {
+        fsTaskServiceImpl.synFsTask();
+    }
 }

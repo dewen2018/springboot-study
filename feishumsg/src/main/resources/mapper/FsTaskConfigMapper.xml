@@ -9,4 +9,12 @@
             (#{fsTaskConfig.userGroup},#{fsTaskConfig.userOpenId},#{fsTaskConfig.userName})
         </foreach>
     </insert>
+
+<!--    <insert id="insertFsTaskConfigs" parameterType="List">-->
+<!--        INSERT INTO fs_task_config(user_group, user_open_id, user_name,user_id)-->
+<!--        VALUES-->
+<!--        <foreach collection="fsTaskConfigs" item="fsTaskConfig" separator=",">-->
+<!--            (#{fsTaskConfig.userGroup},#{fsTaskConfig.userOpenId},#{fsTaskConfig.userName},(select user_id from fs_user where fs_user.open_id = #{fsTaskConfig.userOpenId} limit 1))-->
+<!--        </foreach>-->
+<!--    </insert>-->
 </mapper>

@@ -2,4 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dewen.mapper.FsTaskMapper">
 
+    <insert id="insertFsTasks" parameterType="List">
+        INSERT INTO fs_task(task_id, task_name, task_type, task_status, release_time, create_time)
+        VALUES
+        <foreach collection="fsTasks" item="fsTask" separator=",">
+            (#{fsTask.taskId},#{fsTask.taskName},#{fsTask.taskType},
+            #{fsTask.taskStatus},
+            #{fsTask.releaseTime},#{fsTask.createTime})
+        </foreach>
+    </insert>
+
+    <update id="updateFsTasks" parameterType="List">
+        <foreach collection="fsTasks" item="fsTask" index="index" open="" close="" separator=";">
+            update fs_task
+            <set>
+                task_name=${fsTask.taskName},task_type=${fsTask.taskType},task_status=${fsTask.taskStatus},
+                release_time=${fsTask.releaseTime},update_time=${fsTask.updateTime}
+            </set>
+            where task_id = ${fsTask.taskId}
+        </foreach>
+    </update>
 </mapper>
