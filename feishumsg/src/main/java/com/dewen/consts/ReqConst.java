@@ -4,8 +4,8 @@ public interface ReqConst {
     String prefixAuthorization = "Bearer ";
 //    public String Authorization = prefixAuthorization + "t-3d40f2a46ec42c1986e192572f345007c82c1364";
 
-    String APP_ID = "";
-    String APP_SECRET = "";
+    String APP_ID = "cli_a046d9447b399013";
+    String APP_SECRET = "X8qUshSmqYGKOK7UriA1TcSCKWwI1JOH";
 
     String DEPARTMENTS_LIST = "https://open.feishu.cn/open-apis/contact/v3/departments";
 
@@ -28,6 +28,8 @@ public interface ReqConst {
     String BATCH_SEND_MSG = "https://open.feishu.cn/open-apis/message/v4/batch_send/";
 
     // 获取tenant_access_token
-
     String TENANT_ACCESS_TOKEN = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/";
+
+    // 列出数据表
+    String BITABLE_TABLES = "https://open.feishu.cn/open-apis/bitable/v1/apps/:app_token/tables";
 }

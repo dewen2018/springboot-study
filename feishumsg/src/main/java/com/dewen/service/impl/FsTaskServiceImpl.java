@@ -45,6 +45,7 @@ public class FsTaskServiceImpl extends ServiceImpl<FsTaskMapper, FsTask> impleme
     @Override
     @Transactional
     public void synFsTask() {
+        //
         List<FsTask> fsTasksAdd = new ArrayList<>();
         List<FsTask> fsTasksUpdate = new ArrayList<>();
         List<FsTask> fsTasksWatingSendMsg = new ArrayList<>();
@@ -98,7 +99,8 @@ public class FsTaskServiceImpl extends ServiceImpl<FsTaskMapper, FsTask> impleme
                     if (fsTaskDb == null) {
                         // 需要插入数据库
                         fsTask.setCreateTime(new Date());
-                        fsTasksAdd.add(fsTask);
+                        //fsTasksAdd.add(fsTask);
+                        this.baseMapper.insert(fsTask);
                         // 需要发送消息
                         if ("已发布".equals(fsTask.getTaskStatus())) {
                             fsTasksWatingSendMsg.add(fsTask);
@@ -114,8 +116,8 @@ public class FsTaskServiceImpl extends ServiceImpl<FsTaskMapper, FsTask> impleme
                     }
                 }
                 // 插入操作
-                if (fsTasksAdd.size() > 0)
-                    fsTaskMapper.insertFsTasks(fsTasksAdd);
+//                if (fsTasksAdd.size() > 0)
+//                    fsTaskMapper.insertFsTasks(fsTasksAdd);
                 // 更新操作
 //                if (fsTasksUpdate.size() > 0)
 //                    fsTaskMapper.updateFsTasks(fsTasksUpdate);
@@ -141,14 +143,26 @@ public class FsTaskServiceImpl extends ServiceImpl<FsTaskMapper, FsTask> impleme
 
         JSONObject msg = new JSONObject();
         msg.put("msg_type", "text");
-        msg.put("content", new Content("任务已发布，请及时处理22！"));
+        // msg.put("content", new Content("任务已发布，请及时处理22！"));
 
+        //任务中心xxx发布xxxx任务，快去领取任务赚取绩效。
         for (FsTask fsTask : fsTasks) {
             openIds = fsTaskConfigs.stream().filter(fsTaskConfig -> fsTaskConfig.getUserGroup() == null ? false
                     : (fsTaskConfig.getUserGroup().equals(fsTask.getTaskType()))).map(FsTaskConfig::getUserOpenId).collect(Collectors.toList());
 
+            List<FsTask.Person> persons = fsTask.getIssuer();
+            String issuers = "";
+            if (persons != null) {
+                for (FsTask.Person person : persons) {
+                    issuers += (person.getName() + "，");
+                }
+                issuers = issuers.substring(0, issuers.length() - 1);
+            }
+            msg.put("content", new Content("任务中心" + issuers + "发布" + fsTask.getTaskName() + "任务，快去领取任务赚取绩效。[]"));
             if (openIds.size() > 0) {
                 msg.put("open_ids", openIds);
+
+
                 JSONObject res = HttpUtil.post2(ReqConst.BATCH_SEND_MSG, null, msg);
                 if (0 == res.getInteger("code") && "ok".equals(res.get("msg"))) {
                     JSONObject _obj = res.getJSONObject("data");
