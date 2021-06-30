@@ -4,8 +4,8 @@ public interface ReqConst {
     String prefixAuthorization = "Bearer ";
 //    public String Authorization = prefixAuthorization + "t-3d40f2a46ec42c1986e192572f345007c82c1364";
 
-    String APP_ID = "cli_a046d9447b399013";
-    String APP_SECRET = "X8qUshSmqYGKOK7UriA1TcSCKWwI1JOH";
+    String APP_ID = "";
+    String APP_SECRET = "";
 
     String DEPARTMENTS_LIST = "https://open.feishu.cn/open-apis/contact/v3/departments";
 
@@ -32,4 +32,14 @@ public interface ReqConst {
 
     // 列出数据表
     String BITABLE_TABLES = "https://open.feishu.cn/open-apis/bitable/v1/apps/:app_token/tables";
+
+    // 创建多维表格下的--数据表
+    String ADD_TABLES = "https://open.feishu.cn/open-apis/bitable/v1/apps/%s/tables";
+
+    /**
+     * 数据表新增字段
+     * app_token
+     * table_id
+     */
+    String FIELDS_OPERATION = "https://open.feishu.cn/open-apis/bitable/v1/apps/%s/tables/%s/fields";
 }

@@ -32,11 +32,18 @@ public class FsTask implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "飞书表格行id")
-    @TableId(value = "task_id")
+    @TableId(value = "id")
+    private String id;
+
+    @ApiModelProperty(value = "对应的具体任务")
+    @TableField(value = "task_id")
     private String taskId;
 
-    @ApiModelProperty(value = "任务名称")
+    @ApiModelProperty(value = "0我创建的任务1我收到的任务2总表")
+    @TableField(value = "task_classify")
+    private Integer taskClassify;
 
+    @ApiModelProperty(value = "任务名称")
     private String taskName;
 
     @ApiModelProperty(value = "任务类型")
