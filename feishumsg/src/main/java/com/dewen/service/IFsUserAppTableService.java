@@ -15,5 +15,5 @@ public interface IFsUserAppTableService extends IService<FsUserAppTable> {
     void createFsUserAppTable();
 
 
-    void synMyCreateTask();
+    void synTasks();
 }

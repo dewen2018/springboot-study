@@ -3,7 +3,6 @@ package com.dewen.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +12,6 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <p>
@@ -53,15 +51,15 @@ public class FsTask implements Serializable {
     private String taskStatus;
 
     @ApiModelProperty(value = "发布人")
-    @TableField(typeHandler = JacksonTypeHandler.class)
-    private List<Person> issuer;
+    @TableField(value = "issuer")
+    private String issuer;
 
     @ApiModelProperty(value = "发布时间")
     private Timestamp releaseTime;
 
     @ApiModelProperty(value = "执行人")
-    @TableField(typeHandler = JacksonTypeHandler.class)
-    private List<Person> executor;
+    @TableField(value = "executor")
+    private String executor;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(value = "create_time")
@@ -72,6 +70,18 @@ public class FsTask implements Serializable {
     @TableField(value = "update_time")
     @JSONField(name = "update_time")
     private Date updateTime;
+
+    @ApiModelProperty(value = "用户openId")
+    @TableField(value = "user_open_id")
+    private String userOpenId;
+
+    @ApiModelProperty(value = "用户多维表格应用")
+    @TableField(value = "app_token")
+    private String appToken;
+
+    @ApiModelProperty(value = "表id")
+    @TableField(value = "table_id")
+    private String tableId;
 
     @Data
     @ApiModel("执行人实体类")

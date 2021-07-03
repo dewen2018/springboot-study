@@ -55,6 +55,12 @@
             <version>3.3.1</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-extension</artifactId>-->
+<!--            <version>3.4.3.1</version>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
@@ -87,7 +93,6 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.8</version>
         </dependency>
-
     </dependencies>
 
     <build>

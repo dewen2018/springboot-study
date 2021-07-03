@@ -114,6 +114,114 @@ public class HttpUtil {
     }
 
     /**
+     * 处理put请求
+     *
+     * @param urlStr     请求url
+     * @param data       请求体数据
+     * @param properties 请求头参数
+     * @return
+     */
+    public static JSONObject put(String urlStr, Map<String, String> properties, JSONObject data) {
+        try {
+            log.info("请求url={}", urlStr);
+            log.info("请求体数据data={}", data.toJSONString());
+            log.info("请求头参数properties={}", properties);
+            URL url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setDoInput(true); // 设置可输入
+            connection.setDoOutput(true); // 设置该连接是可以输出的
+            connection.setRequestMethod("PUT"); // 设置请求方式
+            connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+            connection.setRequestProperty("Authorization", Authorization);
+
+            if (properties != null)
+                for (String key : properties.keySet()) {
+                    connection.setRequestProperty(key, properties.get(key));
+                }
+
+            PrintWriter pw = new PrintWriter(new BufferedOutputStream(connection.getOutputStream()));
+            pw.write(data.toJSONString());
+            pw.flush();
+            pw.close();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+            String line = null;
+            StringBuilder result = new StringBuilder();
+            while ((line = br.readLine()) != null) { // 读取数据
+                result.append(line + "\n");
+            }
+            connection.disconnect();
+            JSONObject res = JSONObject.parseObject(result.toString());
+            if (99991663 == res.getInteger("code") || 99991661 == res.getInteger("code")) {
+                getTenantAccessTtoken();
+                return post2(urlStr, properties, data);
+            }
+            return JSONObject.parseObject(result.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("post请求失败");
+            return new JSONObject();
+        }
+    }
+
+    /**
+     * 处理delete请求
+     * @param urlStr
+     * @param properties
+     * @param data
+     * @return
+     */
+    public static JSONObject delete(String urlStr, Map<String, String> properties, JSONObject data) {
+        try {
+            log.info("请求url={}", urlStr);
+            log.info("请求头参数properties={}", properties);
+            URL url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setDoInput(true); // 设置可输入
+            connection.setDoOutput(true); // 设置该连接是可以输出的
+            connection.setRequestMethod("DELETE"); // 设置请求方式
+            connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+            connection.setRequestProperty("Authorization", Authorization);
+
+            if (properties != null)
+                for (String key : properties.keySet()) {
+                    connection.setRequestProperty(key, properties.get(key));
+                }
+
+            PrintWriter pw = new PrintWriter(new BufferedOutputStream(connection.getOutputStream()));
+            if (data != null) {
+                log.info("请求体数据data={}", data.toJSONString());
+                pw.write(data.toJSONString());
+            } else {
+                pw.write(new JSONObject().toJSONString());
+            }
+            pw.flush();
+            pw.close();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+            String line = null;
+            StringBuilder result = new StringBuilder();
+            while ((line = br.readLine()) != null) { // 读取数据
+                result.append(line + "\n");
+            }
+            connection.disconnect();
+            JSONObject res = JSONObject.parseObject(result.toString());
+            if (99991663 == res.getInteger("code") || 99991661 == res.getInteger("code")) {
+                getTenantAccessTtoken();
+                return post2(urlStr, properties, data);
+            }
+            return JSONObject.parseObject(result.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("post请求失败");
+            return new JSONObject();
+        }
+    }
+
+
+    /**
      * 更新token
      */
 

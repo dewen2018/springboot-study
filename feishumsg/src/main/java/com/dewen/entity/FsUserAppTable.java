@@ -33,14 +33,17 @@ public class FsUserAppTable implements Serializable {
     @ApiModelProperty(value = "用户openId")
     private String userOpenId;
 
-    @ApiModelProperty(value = "用户多维表格应用")
-    private String appToken;
+    @ApiModelProperty(value = "用户多维表格应用--发送")
+    private String sendAppToken;
 
-    @ApiModelProperty(value = "表id")
-    private String tableId;
+    @ApiModelProperty(value = "数据表id发送")
+    private String sendTableId;
 
-    @ApiModelProperty(value = "是否是创建任务")
-    private Boolean isBuildTask;
+    @ApiModelProperty(value = "接收任务用的应用")
+    private String recAppToken;
+
+    @ApiModelProperty(value = "接收任务数据表")
+    private String recTableId;
 
     @ApiModelProperty(value = "是否是总表")
     private Boolean isAdmin;
@@ -51,5 +54,6 @@ public class FsUserAppTable implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
-
+    @ApiModelProperty(value = "用途")
+    private String purpose;
 }

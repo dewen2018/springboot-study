@@ -21,6 +21,9 @@ public interface ReqConst {
     //多维表格列出记录
     String MULI_TABLES_RECORD = "https://open.feishu.cn/open-apis/bitable/v1/apps/%s/tables/%s/records";
 
+    //多维表格修改记录
+    String MULI_TABLES_RECORD_UPDATE = "https://open.feishu.cn/open-apis/bitable/v1/apps/%s/tables/%s/records/%s";
+
     // 发送消息
     String SEND_MSG = "https://open.feishu.cn/open-apis/im/v1/messages";
 

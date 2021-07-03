@@ -20,13 +20,15 @@ spring:
       min-idle: 1
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
-      validation-query: select 'x'
+      # validation-query: select 'x'
+      validation-query: SELECT 1 FROM DUAL
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -38,7 +40,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*Mapper.xml
   global-config:
     # 逻辑删除配置
@@ -52,4 +54,4 @@ mybatis-plus:
 logging:
   level:
     root: info
-    com.example: debug
+#    com.dewen.mapper: debug

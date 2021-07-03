@@ -88,12 +88,12 @@ public class FsTaskServiceImpl extends ServiceImpl<FsTaskMapper, FsTask> impleme
                     // 发布人
                     if (fields.getJSONArray("发布人") != null) {
                         List<FsTask.Person> issuer = fields.getJSONArray("发布人").toJavaList(FsTask.Person.class);
-                        fsTask.setIssuer(issuer);
+                        fsTask.setIssuer(JSONObject.toJSONString(issuer));
                     }
                     // 执行人
                     if (fields.getJSONArray("执行人") != null) {
                         List<FsTask.Person> executor = fields.getJSONArray("执行人").toJavaList(FsTask.Person.class);
-                        fsTask.setExecutor(executor);
+                        fsTask.setExecutor(JSONObject.toJSONString(executor));
                     }
                     fsTaskDb = this.baseMapper.selectById(fsTask.getTaskId());
                     if (fsTaskDb == null) {
@@ -150,7 +150,7 @@ public class FsTaskServiceImpl extends ServiceImpl<FsTaskMapper, FsTask> impleme
             openIds = fsTaskConfigs.stream().filter(fsTaskConfig -> fsTaskConfig.getUserGroup() == null ? false
                     : (fsTaskConfig.getUserGroup().equals(fsTask.getTaskType()))).map(FsTaskConfig::getUserOpenId).collect(Collectors.toList());
 
-            List<FsTask.Person> persons = fsTask.getIssuer();
+            List<FsTask.Person> persons = JSONObject.parseArray(fsTask.getIssuer(), FsTask.Person.class);
             String issuers = "";
             if (persons != null) {
                 for (FsTask.Person person : persons) {

@@ -25,7 +25,7 @@ public class FsUserAppTableController {
     @GetMapping("/createFsUserAppTable")
     public void createFsUserAppTable() {
         // fsUserAppTableServiceImpl.createFsUserAppTable();
-        fsUserAppTableServiceImpl.synMyCreateTask();
+        fsUserAppTableServiceImpl.synTasks();
     }
 
 }

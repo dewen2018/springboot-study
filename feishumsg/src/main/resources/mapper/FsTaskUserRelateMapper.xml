@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dewen.mapper.FsTaskUserRelateMapper">
+    <select id="findFsTaskUserRelateDTOListByTaskType" resultType="com.dewen.entity.FsTaskUserRelateDTO" parameterType="string">
+        SELECT open_id,name,rec_app_token,rec_table_id FROM fs_task_user_relate tur left join fs_user_app_table uat on (tur.open_id = uat.user_open_id)
+        where task_type = #{taskType} and is_admin = 0 and purpose is null
+        group by open_id,name,rec_app_token,rec_table_id
+    </select>
+
+</mapper>
