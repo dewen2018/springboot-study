@@ -24,7 +24,7 @@ public class MybatisPlusConfig {
     /**
      * 打印 完整sql
      */
-//    @Bean
+    @Bean
     public PerformanceInterceptor performanceInterceptor() {
         PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
         //格式化sql语句

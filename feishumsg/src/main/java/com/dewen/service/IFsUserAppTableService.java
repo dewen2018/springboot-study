@@ -16,4 +16,6 @@ public interface IFsUserAppTableService extends IService<FsUserAppTable> {
 
 
     void synTasks();
+
+    void synAppTokenAndTaleInfo();
 }

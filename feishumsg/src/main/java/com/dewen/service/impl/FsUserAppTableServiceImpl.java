@@ -155,6 +155,7 @@ public class FsUserAppTableServiceImpl extends ServiceImpl<FsUserAppTableMapper,
         }
     }
 
+
     /**
      * 同步我创建的任务
      *
@@ -431,5 +432,107 @@ public class FsUserAppTableServiceImpl extends ServiceImpl<FsUserAppTableMapper,
         } else {
             fsTaskMapper.update(new FsTask().setExecutor(fsTask.getExecutor()).setUpdateTime(new Date()), queryWrapper);
         }
+    }
+
+
+    @Override
+    @Transactional
+    public void synAppTokenAndTaleInfo() {
+        // 读取配置
+        FsUserAppTable roleUserConfig = fsUserAppTableMapper.selectOne(new QueryWrapper<FsUserAppTable>().lambda().eq(FsUserAppTable::getPurpose, "collectInfo"));
+        if (roleUserConfig == null)
+            return;
+
+        FsUserAppTable onLineFsUserAppTable;
+        JSONObject res = HttpUtil.get(String.format(ReqConst.MULI_TABLES_RECORD, roleUserConfig.getSendAppToken(), roleUserConfig.getSendTableId()), null);
+        if (0 == res.getInteger("code") && "Success".equals(res.get("msg"))) {
+            JSONObject _obj = res.getJSONObject("data");
+            JSONArray jsonArray = JSONObject.parseArray(_obj.getString("items"));
+            if (jsonArray != null) {
+                // 查询数据库中那些openId存在
+                List<FsUserAppTable> fsUserAppTableList = fsUserAppTableMapper.selectList(new QueryWrapper<FsUserAppTable>().last("where purpose is null"));
+                Map<String, Integer> openIdMapId = new HashMap<>();
+                for (FsUserAppTable fsUserAppTable : fsUserAppTableList) {
+                    openIdMapId.put(fsUserAppTable.getUserOpenId(), fsUserAppTable.getId());
+                }
+                for (Object item : jsonArray) {
+                    onLineFsUserAppTable = new FsUserAppTable();
+                    JSONObject itemObject = JSONObject.parseObject(item.toString());
+                    // rowId
+                    //onLineFsUserAppTable.setId(itemObject.getString("id"));
+                    JSONObject fields = itemObject.getJSONObject("fields");
+                    if (fields.size() == 0)
+                        continue;
+                    // 创建任务表格appToken
+                    String sendAppToken = fields.getString("创建任务表格appToken");
+                    if (StrUtil.isNotEmpty(sendAppToken))
+                        onLineFsUserAppTable.setSendAppToken(sendAppToken);
+                    // 创建任务表格tableId
+                    String sendTableId = fields.getString("创建任务表格tableId");
+                    if (StrUtil.isNotEmpty(sendTableId))
+                        onLineFsUserAppTable.setSendTableId(sendTableId);
+                    // 收到任务表格appToken
+                    String recAppToken = fields.getString("收到任务表格appToken");
+                    if (StrUtil.isNotEmpty(recAppToken))
+                        onLineFsUserAppTable.setRecAppToken(recAppToken);
+                    // 收到任务tableId
+                    String recTableId = fields.getString("收到任务tableId");
+                    if (StrUtil.isNotEmpty(recTableId))
+                        onLineFsUserAppTable.setRecTableId(recTableId);
+//                    String sendAppToken = fields.getString("创建任务表格");
+//                    if (StrUtil.isNotEmpty(sendAppToken)) {
+//                        onLineFsUserAppTable.setSendAppToken(sendAppToken.substring(sendAppToken.indexOf("base/") + 5, sendAppToken.indexOf("?table")));
+//                        onLineFsUserAppTable.setSendTableId(sendAppToken.substring(sendAppToken.indexOf("table=") + 6, sendAppToken.indexOf("&view=")));
+//                    }
+//
+//                    String recAppToken = fields.getString("收到任务表格");
+//                    if (StrUtil.isNotEmpty(recAppToken)) {
+//                        onLineFsUserAppTable.setRecAppToken(recAppToken.substring(recAppToken.indexOf("base/") + 5, recAppToken.indexOf("?table")));
+//                        onLineFsUserAppTable.setRecTableId(recAppToken.substring(recAppToken.indexOf("table=") + 6, recAppToken.indexOf("&view=")));
+//                    }
+
+                    // 人员姓名
+                    if (fields.getJSONArray("人员姓名") != null) {
+                        List<FsTask.Person> executor = fields.getJSONArray("人员姓名").toJavaList(FsTask.Person.class);
+                        if (executor != null && executor.size() > 0) {
+                            onLineFsUserAppTable.setUserOpenId(executor.get(0).getId());
+                            onLineFsUserAppTable.setUserName(executor.get(0).getName());
+                            // 存在于数据库中
+                            Integer id = openIdMapId.remove(executor.get(0).getId());
+                            if (id == null) {
+                                onLineFsUserAppTable.setCreateTime(new Date());
+                                fsUserAppTableMapper.insert(onLineFsUserAppTable);
+                            } else {
+                                onLineFsUserAppTable.setId(id);
+                                onLineFsUserAppTable.setUpdateTime(new Date());
+                                fsUserAppTableMapper.updateById(onLineFsUserAppTable);
+                            }
+//                            if (openIdMapId.remove(executor.get(0).getId())) {
+//
+//                            }
+                        }
+                    }
+                }
+                // 删除线上删除得的数据
+                openIdMapId.forEach((k, v) -> {
+                    fsUserAppTableMapper.deleteById(v);
+                });
+            } else {
+                log.error(res.toJSONString());
+                throw new RuntimeException(res.getString("msg"));
+            }
+
+        }
+
+    }
+
+    public static void main(String[] args) {
+        String url = "https://jrla61gzs4.feishu.cn/base/bascnXLfe1L46f0chx1hCIh24tT?table=tblnQbypE8J64Xmw&view=vewKL2Eo0w";
+        String s = url.substring(url.indexOf("base/") + 5, url.indexOf("?table"));
+        String s2 = url.substring(url.indexOf("table=") + 6, url.indexOf("&view="));
+        System.out.println(s);
+        System.out.println(s2);
+
+
     }
 }

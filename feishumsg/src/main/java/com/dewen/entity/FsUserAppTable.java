@@ -33,6 +33,9 @@ public class FsUserAppTable implements Serializable {
     @ApiModelProperty(value = "用户openId")
     private String userOpenId;
 
+    @ApiModelProperty(value = "用户名称")
+    private String userName;
+
     @ApiModelProperty(value = "用户多维表格应用--发送")
     private String sendAppToken;
 

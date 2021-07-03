@@ -1,0 +1,17 @@
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    data-id: n0001
+    auto-refresh: true
+#    group: group0001
+#    namespace: dewen
+
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
