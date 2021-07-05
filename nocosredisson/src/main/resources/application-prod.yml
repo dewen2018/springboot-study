@@ -1,8 +1,8 @@
 nacos:
   config:
     server-addr: 127.0.0.1:8848
-    data-id: dewen2
-    auto-refresh: true
+    namespace: prod
+
 
 
 management:
@@ -12,4 +12,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: *
+        include: '*'
