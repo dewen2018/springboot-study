@@ -44,6 +44,17 @@
             <artifactId>nacos-config-spring-boot-actuator</artifactId>
             <version>${nacos-config-spring-boot.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.6.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

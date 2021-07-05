@@ -3,4 +3,13 @@ server:
 
 spring:
   profiles:
-    active: prod
+    active: dev
+  jackson:
+    default-property-inclusion: non_null
+    date-format: YYYY-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+logging:
+  level:
+    com.dewen: debug
+    org.springframework.web: trace

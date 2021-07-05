@@ -12,3 +12,7 @@ management:
     web:
       exposure:
         include: '*'
+
+redisson:
+  address: redis://localhost:6379
+  password: 123456
