@@ -1,0 +1,62 @@
+server:
+  port: 80
+  servlet:
+    context-path: /
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3307/dewen_paycom?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: root
+      filters:
+        commons-log.connection-logger-name: stat,wall,log4j
+      max-active: 100
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      # validation-query: select 'x'
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    # Âß¼­É¾³ýÅäÖÃ
+    db-config:
+      # É¾³ýÇ°
+      logic-not-delete-value: 1
+      # É¾³ýºó
+      logic-delete-value: 0
+
+
+logging:
+  level:
+    root: info
+#    com.dewen.mapper: debug
+
