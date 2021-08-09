@@ -18,19 +18,19 @@ public class RedissonAutoConfiguration {
     /**
      * 单机模式配置
      **/
-//    @Bean
-//    public RedissonClient getRedisson() {
-//        Config config = new Config();
-//        config.useSingleServer()
-//                .setAddress(addressUrl)
-//                .setPassword(password)
-//                .setDatabase(0)
-//                .setReconnectionTimeout(10000)
-//                .setRetryInterval(5000)
-//                .setTimeout(10000)
-//                .setConnectTimeout(10000);
-//        return Redisson.create(config);
-//    }
+    @Bean
+    public RedissonClient getRedisson() {
+        Config config = new Config();
+        config.useSingleServer()
+                .setAddress(addressUrl)
+                .setPassword(password)
+                .setDatabase(0)
+                .setReconnectionTimeout(10000)
+                .setRetryInterval(5000)
+                .setTimeout(10000)
+                .setConnectTimeout(10000);
+        return Redisson.create(config);
+    }
 
     /**
      * 哨兵模式
@@ -77,19 +77,19 @@ public class RedissonAutoConfiguration {
      * @Date 20203/19 10:54
      * @Param
      **/
-    @Bean
-    public RedissonClient getRedisson() {
-        RedissonClient redisson;
-        Config config = new Config();
-        config.useMasterSlaveServers()
-                //可以用"rediss://"来启用SSL连接
-                .setMasterAddress("redis://***(主服务器IP):6379").setPassword("web2017")
-                .addSlaveAddress("redis://***（从服务器IP）:6379")
-                .setReconnectionTimeout(10000)
-                .setRetryInterval(5000)
-                .setTimeout(10000)
-                .setConnectTimeout(10000);//（连接超时，单位：毫秒 默认值：3000）;
-        redisson = Redisson.create(config);
-        return redisson;
-    }
+//    @Bean
+//    public RedissonClient getRedisson() {
+//        RedissonClient redisson;
+//        Config config = new Config();
+//        config.useMasterSlaveServers()
+//                //可以用"rediss://"来启用SSL连接
+//                .setMasterAddress("redis://***(主服务器IP):6379").setPassword("web2017")
+//                .addSlaveAddress("redis://***（从服务器IP）:6379")
+//                .setReconnectionTimeout(10000)
+//                .setRetryInterval(5000)
+//                .setTimeout(10000)
+//                .setConnectTimeout(10000);//（连接超时，单位：毫秒 默认值：3000）;
+//        redisson = Redisson.create(config);
+//        return redisson;
+//    }
 }
