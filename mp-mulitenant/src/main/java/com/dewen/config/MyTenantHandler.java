@@ -31,8 +31,17 @@ public class MyTenantHandler implements TenantHandler {
 
 
     @Autowired
-    private MyContext apiContext;
+    private PresentContext apiContext;
 
+    /**
+     * 租户字段名
+     *
+     * @return
+     */
+    @Override
+    public String getTenantIdColumn() {
+        return SYSTEM_TENANT_ID;
+    }
 
     /**
      * 租户Id
@@ -48,17 +57,6 @@ public class MyTenantHandler implements TenantHandler {
             return new NullValue();
         }
         return new LongValue(tenantId);
-    }
-
-
-    /**
-     * 租户字段名
-     *
-     * @return
-     */
-    @Override
-    public String getTenantIdColumn() {
-        return SYSTEM_TENANT_ID;
     }
 
 

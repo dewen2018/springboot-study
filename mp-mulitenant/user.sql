@@ -1,0 +1,6 @@
+CREATE TABLE `mp_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(30) DEFAULT NULL COMMENT '姓名',
+  `tenant_id` int(11) NOT NULL COMMENT '多租户ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;

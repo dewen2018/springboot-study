@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 当前系统的上下文
  */
 @Component
-public class MyContext {
+public class PresentContext {
 
     private static final String KEY_CURRENT_TENANT_ID = "KEY_CURRENT_PROVIDER_ID";
     private static final Map<String, Object> M_CONTEXT = new ConcurrentHashMap<>();
