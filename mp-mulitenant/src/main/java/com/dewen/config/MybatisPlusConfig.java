@@ -18,7 +18,9 @@ import org.springframework.context.annotation.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * dj 2021年8月10日11:42:00
+ */
 @Configuration
 @MapperScan("com.dewen.mapper")
 public class MybatisPlusConfig {

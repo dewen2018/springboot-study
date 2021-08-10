@@ -12,4 +12,7 @@
 6.feishumsg集成飞书做轻应用，发送消息，操作多维文档等等
 7.nocosredisson：使用nacos作为注册中心
 8.springbatch：springbatch批处理框架
-9.alipay
+9.alipay阿里支付
+10.mp-mulitenant多租户
+11.nettysocketio
+12.sb-returnvaluehandler统一返回处理，同时支持原始数据返回

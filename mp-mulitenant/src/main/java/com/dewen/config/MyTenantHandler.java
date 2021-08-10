@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * dj 2021年8月10日11:42:00
+ */
 @Slf4j
 @Component
 public class MyTenantHandler implements TenantHandler {

@@ -1,15 +1,15 @@
 package com.dewen.mapper;
 
 import com.baomidou.mybatisplus.annotation.SqlParser;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.dewen.entity.User;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+/**
+ * dj 2021年8月10日11:42:00
+ */
 public interface UserMapper extends BaseMapper<User> {
     @Select("select * from mp_user")
     List<User> selectUserList();
