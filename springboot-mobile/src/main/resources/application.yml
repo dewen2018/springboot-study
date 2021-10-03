@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: mobile
+server:
+  port: 8000
