@@ -15,11 +15,23 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<lombok.version>1.16.18</lombok.version>
+		<mybatis-plus-boot-starter.version>3.3.1.tmp</mybatis-plus-boot-starter.version>
+		<shardingsphere.version>4.0.0-RC1</shardingsphere.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
 		<dependency>
@@ -33,40 +45,58 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-
-		<!--mysql-->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<!--Mybatis-Plus-->
+		<!-- mybatis-plus begin -->
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>3.1.1</version>
+			<version>${mybatis-plus-boot-starter.version}</version>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>com.baomidou</groupId>-->
-<!--			<artifactId>mybatis-plus-annotation</artifactId>-->
-<!--			<version>3.1.1</version>-->
-<!--		</dependency>-->
-		<!--shardingsphere start-->
-		<!-- for spring boot -->
+		<!-- mybatis-plus end -->
+		<!--shardingsphere版本-->
 		<dependency>
-			<groupId>io.shardingsphere</groupId>
+			<groupId>org.apache.shardingsphere</groupId>
 			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-			<version>3.1.0</version>
+			<version>${shardingsphere.version}</version>
 		</dependency>
-		<!-- for spring namespace -->
 		<dependency>
-			<groupId>io.shardingsphere</groupId>
-			<artifactId>sharding-jdbc-spring-namespace</artifactId>
-			<version>3.1.0</version>
+			<groupId>com.dangdang</groupId>
+			<artifactId>sharding-jdbc-self-id-generator</artifactId>
+			<version>1.4.2</version>
 		</dependency>
-
-		<!--shardingsphere end-->
+		<dependency>
+			<groupId>org.apache.shardingsphere</groupId>
+			<artifactId>sharding-jdbc-spring-namespace</artifactId>
+			<version>${shardingsphere.version}</version>
+		</dependency>
+		<!--  ehcache缓存 -->
+		<dependency>
+			<groupId>org.mybatis.caches</groupId>
+			<artifactId>mybatis-ehcache</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
