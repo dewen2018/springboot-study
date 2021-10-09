@@ -16,3 +16,8 @@
 10.mp-mulitenant多租户
 11.nettysocketio
 12.sb-returnvaluehandler统一返回处理，同时支持原始数据返回
+13.sb-asynctask @Sync异步任务
+14.springboot-mobile获取移动端设备类型，pc,ios，Android
+15.minganxinxijiami 配置文件敏感信息加密
+16.sb-shardingjdbc分库分表，主从
+17.redis-delay-queue 使用Redis实现延迟队列，任务放到任务池和放入桶，读取桶到延迟时间就放入队列
