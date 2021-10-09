@@ -25,15 +25,14 @@ public class GoodsController {
 
     @GetMapping("/list")
     public List<Goods> list() {
-
         return goodsService.findByGoods();
     }
 
     @GetMapping("/getGoodsById")
     public Goods getGoodsById(Integer id) {
-        for (int i = 0; i < 100000; i++) {
-            System.out.println(idGenerator.generateId());
-        }
+//        for (int i = 0; i < 100000; i++) {
+//            System.out.println(idGenerator.generateId());
+//        }
         return goodsService.getByGoodsId(id);
     }
 
