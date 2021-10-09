@@ -1,0 +1,32 @@
+server:
+  port: 80
+#  port: 9090
+
+spring:
+  security:
+    user:
+      name: dewen
+      password: dewen
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 863572313@qq.com
+    password: qazwsx
+    default-encoding: utf-8
+
+  boot:
+    admin:
+      notify:
+        mail:
+          # 逗号分隔的邮件收件人列表
+          to: 863572313@qq.com
+          # 开启邮箱通知
+          enabled: true
+          # 不需要发送通知的状态：从状态A:到状态B
+          # ignore-changes: { "UNKNOWN:UP" }
+          # 逗号分隔的抄送收件人列表
+          # cc: 863572313@qq.com
+          # 发件人
+          from: Spring Boot Dewen<863572313@qq.com>
+          # 自定义邮件模版
+          # template: classpath:/templates/notify.html
