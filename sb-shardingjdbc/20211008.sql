@@ -68,3 +68,46 @@ CREATE TABLE `t_dict` (
 INSERT INTO `t_dict` VALUES ('-34643968', '男', 'man');
 INSERT INTO `t_dict` VALUES ('997154816', '男', 'man');
 INSERT INTO `t_dict` VALUES ('1122983936', '男', 'man');
+
+
+
+
+
+CREATE TABLE `t_order0` (
+  `id` int(11) NOT NULL,
+  `order_no` varchar(45) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `t_order1` (
+  `id` int(11) NOT NULL,
+  `order_no` varchar(45) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `t_order_item0` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `good_name` varchar(45) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `t_order_item1` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `good_name` varchar(45) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+set sql_safe_updates = 0;
+delete from t_order0;
+delete from t_order1;
+delete from t_order_item0;
+delete from t_order_item1;

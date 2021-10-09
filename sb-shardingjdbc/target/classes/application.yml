@@ -61,21 +61,43 @@ spring:
         password: 1234
     # 分库规则（根据id取模）
     sharding:
-      binding-tables: goods
-      # 广播表（即每个库中都需要一个同样的表用于关联查询，多为字典表）
+      # 设置绑定表
+      # 根据我的理解绑定貌似没有多大用，原因如下：
+      # 通过userId只能却认定order和orderItem落在同一数据库，但是并不能保证order和item同时落在0，或1
+      # binding-tables: goods,t_order,t_order_item
+      # 广播表:公共表（即每个库中都需要一个同样的表用于关联查询，多为字典表）
       broadcast-tables: t_dict
+      # 分库配置
       default-database-strategy:
         inline:
-          sharding-column: id
-          algorithm-expression: master$->{Math.abs(id)%2}
-      # 分表规则根据id取模
+          sharding-column: user_id
+          algorithm-expression: master$->{Math.abs(user_id)%2}
+      # 分表配置:分表规则根据id取模
       tables:
         goods:
+          # key-generator:
+          #   column: id
+          #   type: SNOWFLAKE
+          # 通过inline表达式指定所有的实际数据分片节点
           actual-data-nodes: master$->{0..1}.goods$->{0..1}
           table-strategy:
             inline:
+              # 表分片键
               sharding-column: id
+              # 分片策略的inline表达式
               algorithm-expression: goods$->{Math.abs(id) % 2}
+        t_order:
+          actual-data-nodes: master$->{0..1}.t_order$->{0..1}
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: t_order$->{Math.abs(id) % 2}
+        t_order_item:
+          actual-data-nodes: master$->{0..1}.t_order_item$->{0..1}
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: t_order_item$->{Math.abs(id) % 2}
       # 读写分离(需要在mysql端配置bin-log主从同步)
       # 用于配置从库负载均衡算法类型，可选值：ROUND_ROBIN(轮询)，RANDOM（随机）
       # 以下不配置默认读取master节点数据
