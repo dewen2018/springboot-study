@@ -43,3 +43,5 @@
 	mqtt协议未完成
 22.sb-upload-doload
 	分片上传，断点续传
+23.sb-jimureport
+	积木报表demo
