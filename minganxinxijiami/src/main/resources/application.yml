@@ -1,26 +1,24 @@
 server:
   port: 8080
 spring:
-  # Êı¾İ¿âÏà¹ØÅäÖÃ
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    # ÕâÀï¼ÓÉÏºó×ºÓÃÀ´·ÀÖ¹mysqlÂÒÂë,serverTimezone=GMT%2b8ÉèÖÃÊ±Çø
-    url: ENC(ul0PHqbRRNne1AUFzT4lPECv0JJ4tQVyoCo3e/+Va5kIAmsfdi5C2qXabhxOmvCW6YtvQoDhHVPbOgbu6anT1uU0+7NyeLqal5SLEVo0ptIT/CxIhKrSJShGJF+tuED+1zmovSm4WEdzmuiTy9egthTUSgudM9fKihNDH5RceIsmy2oulGpM7w==)
-    username: ENC(yS81qZ65y8Cq/8z/JzuUnw==)
-    password: ENC(kzoFuZEcOG90EfK2Fp+oSQ==)
+    url: ENC(7vbo97d+WiweSao6OxN7hJwG5BCdwYqrUJzdZdxxe9vSIDfrXtc+kFuqC7H3D6y4nafrhtp/DfXoNDcBO2wgZswGgt0N2Ooc9fcvC1LdFfu0kjVS6fjENMOqTcEXpsHm2LPLtLnh+XFpbQKo44FS/yzlK/RLFFfD1uIdtpszanrF7vXtVoHdhw==)
+    username: ENC(IkuUyvWnAm8u1Dz5TEfJPg==)
+    password: ENC(5SkKVMCNR9Pl97D48Gmf4Q==)
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-  # ·µ»ØµÄapi½Ó¿ÚµÄÅäÖÃ£¬È«¾ÖÓĞĞ§
   jackson:
-    # Èç¹ûÄ³Ò»¸ö×Ö¶ÎÎªnull£¬¾Í²»ÔÙ·µ»ØÕâ¸ö×Ö¶Î
-    default-property-inclusion: non_null
+    # if null not,å¦‚æœä¸ºnull å°±ä¼šä¸å±•ç¤ºæ”¹å­—æ®µï¼Œåä¹‹å±•ç¤º
+    # default-property-inclusion: non_null
     date-format: yyyy-MM-dd HH:mm:ss
     serialization:
       write-dates-as-timestamps: false
     time-zone: GMT+8
-# jasypt¼ÓÃÜµÄÃÜ³×
+
+# key
 jasypt:
   encryptor:
     password: Y6M9fAJQdU7jNp5MW

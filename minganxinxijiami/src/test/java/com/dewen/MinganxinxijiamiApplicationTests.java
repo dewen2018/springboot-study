@@ -17,9 +17,9 @@ class MinganxinxijiamiApplicationTests {
 
     @Test
     public void getPass() {
-        String url = encryptor.encrypt("jdbc:mysql://localhost:3307/dewen_anything?autoReconnect=true&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8");
+        String url = encryptor.encrypt("jdbc:mysql://localhost:3306/dewen_examples?autoReconnect=true&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8");
         String name = encryptor.encrypt("root");
-        String password = encryptor.encrypt("root");
+        String password = encryptor.encrypt("1234");
         System.out.println("database url: " + url);
         System.out.println("database name: " + name);
         System.out.println("database password: " + password);
