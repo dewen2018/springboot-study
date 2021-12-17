@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:leopard="http://www.leopard.io/schema/leopard"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.leopard.io/schema/leopard http://www.leopard.io/schema/leopard.xsd">
+
+    <leopard:component-scan base-package="com.dewen.services"/>
+
+    <leopard:jdbc id="jdbc" host="127.0.0.1:3306" database="sqt_jxc" user="root" password="1234"/>
+<!--    <leopard:redis id="redis" server="112.126.75.27:6311"/>-->
+
+</beans>
