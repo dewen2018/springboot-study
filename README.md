@@ -53,3 +53,5 @@
 	螺丝钉，快速生成数据库文档
 27.27bean-inject
 	bean注入
+28.28filed-encrypt
+	字段加密，数据库密文，返回明文，利用mybatis typeHandler实现
