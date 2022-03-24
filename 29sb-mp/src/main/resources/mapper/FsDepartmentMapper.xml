@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dewen.mapper.FsDepartmentMapper">
+
+    <insert id="insertFsDepartments" parameterType="List">
+        INSERT INTO fs_department(open_department_id, `name`, leader_user_id, member_count, parent_department_id, `order`)
+        VALUES
+        <foreach collection="fsDepartments" item="fsDepartment" separator=",">
+            (#{fsDepartment.openDepartmentId},#{fsDepartment.name},#{fsDepartment.leaderUserId},
+            #{fsDepartment.memberCount},#{fsDepartment.parentDepartmentId},#{fsDepartment.order})
+        </foreach>
+    </insert>
+
+    <select id="selectALl" resultType="com.dewen.entity.FsDepartment">
+        select open_department_id, `name`, leader_user_id, member_count, parent_department_id, status, `order`, create_time, update_time from fs_department
+    </select>
+</mapper>
