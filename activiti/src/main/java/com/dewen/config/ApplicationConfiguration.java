@@ -1,4 +1,20 @@
-package com.dewen;
+/*
+ * Copyright 2018 Alfresco, Inc. and/or its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.dewen.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,18 +36,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Set up some users and groups that we can use when interacting with the process engine API.
- * We use the testuser in the process definition so we need to include this user.
- * <p>
- * We also enable Web security so we can build a simple ReST API that uses the Process Engine Java API. We need
- * to be authenticated with a user that has the role ROLE_ACTIVITI_USER to be able to use the API.
- */
 @Configuration
 @EnableWebSecurity
-public class DemoApplicationConfiguration extends WebSecurityConfigurerAdapter {
+public class ApplicationConfiguration extends WebSecurityConfigurerAdapter {
 
-    private Logger logger = LoggerFactory.getLogger(DemoApplicationConfiguration.class);
+    private Logger logger = LoggerFactory.getLogger(ApplicationConfiguration.class);
 
     @Override
     @Autowired
@@ -45,10 +54,11 @@ public class DemoApplicationConfiguration extends WebSecurityConfigurerAdapter {
         InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
 
         String[][] usersGroupsAndRoles = {
-                {"mbergljung", "1234", "ROLE_ACTIVITI_USER", "GROUP_activitiTraining"},
-                {"testuser", "1234", "ROLE_ACTIVITI_USER", "GROUP_activitiTraining"},
-                {"system", "1234", "ROLE_ACTIVITI_USER"},
-                {"admin", "1234", "ROLE_ACTIVITI_ADMIN"},
+                {"salaboy", "password", "ROLE_ACTIVITI_USER", "GROUP_activitiTeam"},
+                {"ryandawsonuk", "password", "ROLE_ACTIVITI_USER", "GROUP_activitiTeam"},
+                {"erdemedeiros", "password", "ROLE_ACTIVITI_USER", "GROUP_activitiTeam"},
+                {"other", "password", "ROLE_ACTIVITI_USER", "GROUP_otherTeam"},
+                {"admin", "password", "ROLE_ACTIVITI_ADMIN"},
         };
 
         for (String[] user : usersGroupsAndRoles) {
@@ -62,6 +72,7 @@ public class DemoApplicationConfiguration extends WebSecurityConfigurerAdapter {
         return inMemoryUserDetailsManager;
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -71,6 +82,8 @@ public class DemoApplicationConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .httpBasic();
+
+
     }
 
     @Bean

@@ -1,16 +1,20 @@
 spring:
-  datasource:
-    username: root
-    password: 1234
-    url: jdbc:mysql://localhost:3306/dewen_activiti?nullCatalogMeansCurrent=true&useUnicode=true&characterEncoding=UTF-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  devtools:
-    restart:
-      enabled: true
   activiti:
     database-schema-update: true
     history-level: full
     db-history-used: true
+    check-process-definitions: false # 自动部署验证设置:true-开启（默认）、false-关闭
+  datasource:
+    url: jdbc:mysql://119.23.47.158:33007/activiti7?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&nullCatalogMeansCurrent=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialization-mode: always
+  security:
+    user:
+      name: admin
+      password: admin
 
-
-debug: true
+swagger:
+  enabled: true
