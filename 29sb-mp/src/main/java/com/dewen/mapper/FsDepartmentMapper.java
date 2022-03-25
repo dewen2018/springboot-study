@@ -1,5 +1,6 @@
 package com.dewen.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -26,4 +28,7 @@ public interface FsDepartmentMapper extends BaseMapper<FsDepartment> {
 
     @Select("${ew}")
     IPage<FsDepartment> pageTest(@Param("page") Page<FsDepartment> page, @Param("ew") String sql);
+
+    IPage<Map<String, Object>> selectpage(@Param("page") Page page);
+//    IPage<JSONObject> selectpage(@Param("page") Page page);
 }

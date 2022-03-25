@@ -3,6 +3,8 @@ package com.dewen.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dewen.entity.FsDepartment;
 
+import java.text.ParseException;
+
 /**
  * <p>
  * 部门信息 服务类
@@ -13,4 +15,6 @@ import com.dewen.entity.FsDepartment;
  */
 public interface IFsDepartmentService extends IService<FsDepartment> {
     void pageTest();
+
+    void selectpage() throws ParseException;
 }

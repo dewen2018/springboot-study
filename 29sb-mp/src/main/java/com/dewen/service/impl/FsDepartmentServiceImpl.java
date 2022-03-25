@@ -10,6 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,9 +37,44 @@ public class FsDepartmentServiceImpl extends ServiceImpl<FsDepartmentMapper, FsD
         String sql = "select * from sale_order where ssoDepId in (select oxPermOrgId from ox_user_org where userId = 1621397715185)";
 //        new Page<T>
         IPage<FsDepartment> res = fsDepartmentMapper.pageTest(new Page<FsDepartment>(1, 15), sql);
-        res.getRecords().forEach(i->{
+        res.getRecords().forEach(i -> {
             log.info(String.valueOf(i));
         });
     }
+
+    @Override
+    public void selectpage() throws ParseException {
+
+        IPage<Map<String, Object>> res = fsDepartmentMapper.selectpage(new Page<FsDepartment>(1, 15));
+        for (Map<String, Object> record : res.getRecords()) {
+            System.out.println(record);
+
+            getDate(record.get("lastUpdateTime"));
+        }
+//        IPage<JSONObject> res = fsDepartmentMapper.selectpage(new Page<FsDepartment>(1, 15));
+//        for (JSONObject record : res.getRecords()) {
+//            System.out.println(record);
+//            System.out.println(record.getDate("lastUpdateTime"));
+//        }
+    }
+
+    public void getDate(Object tmpDateExecuted) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dateExecuted = null;
+        if (tmpDateExecuted instanceof Date) {
+            dateExecuted = (Date) tmpDateExecuted;
+            System.out.println(df.format(dateExecuted));
+        } else if (tmpDateExecuted instanceof LocalDateTime) {
+
+        } else {
+
+            try {
+                dateExecuted = df.parse((String) tmpDateExecuted);
+                System.out.println(dateExecuted);
+            } catch (ParseException var24) {
+            }
+        }
+    }
+
 
 }

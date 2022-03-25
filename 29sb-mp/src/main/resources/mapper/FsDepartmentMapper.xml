@@ -14,4 +14,10 @@
     <select id="selectALl" resultType="com.dewen.entity.FsDepartment">
         select open_department_id, `name`, leader_user_id, member_count, parent_department_id, status, `order`, create_time, update_time from fs_department
     </select>
+
+    <select id="selectpage" resultType="hashmap">
+<!--    <select id="selectpage" resultType="com.alibaba.fastjson.JSONObject">-->
+        select id, orgId, ssoOrgId, ssoUid, code, name, bizId, userType, orgName, status, mobile, post, parentId, account, password, salt, pwdUpdateTime, deleted,
+         headpic, createTime, createUserId, lastUpdateTime, lastUpdateUserId, remark, email, ssoDepId from pf_om_user
+    </select>
 </mapper>
