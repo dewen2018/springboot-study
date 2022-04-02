@@ -17,4 +17,6 @@ public interface IFsDepartmentService extends IService<FsDepartment> {
     void pageTest();
 
     void selectpage() throws ParseException;
+
+    void getTest();
 }

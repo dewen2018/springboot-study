@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dewen.entity.FsDepartment;
+import com.dewen.ldap.DaoSupport;
 import com.dewen.mapper.FsDepartmentMapper;
+import com.dewen.pfOmUser.User;
 import com.dewen.service.IFsDepartmentService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +33,9 @@ public class FsDepartmentServiceImpl extends ServiceImpl<FsDepartmentMapper, FsD
 
     @Resource
     private FsDepartmentMapper fsDepartmentMapper;
+
+    @Autowired
+    private DaoSupport daoSupport;
 
     @Override
     public void pageTest() {
@@ -77,4 +83,10 @@ public class FsDepartmentServiceImpl extends ServiceImpl<FsDepartmentMapper, FsD
     }
 
 
+    public void getTest() {
+        String sql = "select id, orgId, ssoOrgId, ssoUid, code, name, bizId, userType, orgName, status, mobile, post, parentId, account, password, salt, pwdUpdateTime, deleted," +
+                "         headpic, createTime, createUserId, lastUpdateTime, lastUpdateUserId, remark, email, ssoDepId from pf_om_user where id = 1621397716076";
+        log.info("sql:{}", sql);
+        System.out.println(daoSupport.getBySql(User.class, sql));
+    }
 }

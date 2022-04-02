@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
 
 /**
  * 部门信息 前端控制器
@@ -26,8 +27,9 @@ public class FsDepartmentController {
     }
 
     @GetMapping("/pageTest")
-    public void pageTest() {
-        fsDepartmentServiceImpl.pageTest();
+    public void pageTest() throws ParseException {
+//        fsDepartmentServiceImpl.getTest();
+        fsDepartmentServiceImpl.selectpage();
     }
 
 }

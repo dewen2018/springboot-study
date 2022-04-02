@@ -17,7 +17,8 @@ class FeishumsgApplicationTests {
     @Test
     void contextLoads() throws ParseException {
 //        fsDepartmentServiceImpl.pageTest();
-        fsDepartmentServiceImpl.selectpage();
+//        fsDepartmentServiceImpl.selectpage();
+        fsDepartmentServiceImpl.getTest();
     }
 
 }
