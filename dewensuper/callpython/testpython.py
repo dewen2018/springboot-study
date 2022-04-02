@@ -1,0 +1,1 @@
+print('Hello world!测试中文')
