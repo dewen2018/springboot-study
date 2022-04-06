@@ -10,7 +10,7 @@
         <version>2.5.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>dewen</groupId>
+    <groupId>com.dewen</groupId>
     <artifactId>dewensuper</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -20,7 +20,10 @@
 
     <!-- child module -->
     <modules>
-        <module>callpython</module>
+<!--        <module>callpython</module>-->
+<!--        <module>baidu-uid</module>-->
+<!--        <module>enable-config</module>-->
+<!--        <module>improved-throughput</module>-->
     </modules>
 
     <properties>
