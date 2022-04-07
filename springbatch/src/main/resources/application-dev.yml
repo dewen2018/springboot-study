@@ -1,37 +1,37 @@
-server:
-  port: 8080
-
-spring:
-  application:
-    name: batch
-      #batch:
-      #job:
-    #names: parentJob #启动父Job  有父子job的开启它
-    #enabled: false  # 不会自动启动服务
-
-
-    initialize-schema: never #若没有元数据表会报错
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/dewen_batch?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: root
-    initialSize: 5
-    minIdle: 5
-    maxActive: 20
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    maxPoolPreparedStatementPerConnectionSize: 20
-    filters: stat,wall,log4j
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-
-mybatis-plus:
-  mapper-locations: classpath:/mapper/*Mapper.xml
-  typeAliasesPackage: com.dewen.entity
+#server:
+#  port: 8080
+#
+#spring:
+#  application:
+#    name: batch
+#      #batch:
+#      #job:
+#    #names: parentJob #启动父Job  有父子job的开启它
+#    #enabled: false  # 不会自动启动服务
+#
+#
+#    initialize-schema: never #若没有元数据表会报错
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3307/dewen_batch?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+#    username: root
+#    password: root
+#    initialSize: 5
+#    minIdle: 5
+#    maxActive: 20
+#    maxWait: 60000
+#    timeBetweenEvictionRunsMillis: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: true
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    filters: stat,wall,log4j
+#    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#
+#mybatis-plus:
+#  mapper-locations: classpath:/mapper/*Mapper.xml
+#  typeAliasesPackage: com.dewen.entity

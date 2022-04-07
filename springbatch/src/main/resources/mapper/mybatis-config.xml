@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="defaultExecutorType" value="REUSE"/>
+		<setting name="defaultStatementTimeout" value="20000"/>
+		<setting name="mapUnderscoreToCamelCase" value="false"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="java.util.List" alias="list"/>
+		<typeAlias type="java.util.Map" alias="map"/>
+		<typeAlias type="java.util.HashMap" alias="hashmap"/>
+	</typeAliases>
+
+</configuration>

@@ -1,3 +1,65 @@
+#spring:
+#  profiles:
+#    active: dev
+
+logging:
+  config: classpath:logging/logback.xml
+
+#---
+
 spring:
-  profiles:
-    active: dev
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/batch?serverTimezone=Asia/Seoul&autoreconnect=true
+      username: root
+      password: 1q2w3e4r1!
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      validation-query: SELECT 1
+      test-on-borrow: true
+      test-on-return: false
+    first:
+      url: jdbc:mysql://localhost:3306/adb?serverTimezone=Asia/Seoul&autoreconnect=true
+      username: root
+      password: 1q2w3e4r1!
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      validation-query: SELECT 1
+      test-on-borrow: true
+      test-on-return: false
+    second:
+      url: jdbc:mysql://localhost:3306/bdb?serverTimezone=Asia/Seoul&autoreconnect=true
+      username: root
+      password: 1q2w3e4r1!
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      validation-query: SELECT 1
+      test-on-borrow: true
+      test-on-return: false
+#---
+
+# spring.profiles.active=prod
+#spring:
+#  profiles: prod
+#  datasource:
+#    hikari:
+#      jdbc-url: jdbc:mysql://localhost:3306/batch?serverTimezone=Asia/Seoul&autoreconnect=true
+#      username: root
+#      password: 1q2w3e4r1!
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      validation-query: SELECT 1
+#      test-on-borrow: true
+#      test-on-return: false
+#    first:
+#      jdbc-url: jdbc:mysql://localhost:3306/adb?serverTimezone=Asia/Seoul&autoreconnect=true
+#      username: root
+#      password: 1q2w3e4r1!
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      validation-query: SELECT 1
+#      test-on-borrow: true
+#      test-on-return: false
+#    second:
+#      jdbc-url: jdbc:mysql://localhost:3306/bdb?serverTimezone=Asia/Seoul&autoreconnect=true
+#      username: root
+#      password: 1q2w3e4r1!
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      validation-query: SELECT 1
+#      test-on-borrow: true
+#      test-on-return: false

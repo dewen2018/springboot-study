@@ -35,6 +35,9 @@ management:
       exposure:
         include: "*"
   endpoint:
+    # allow shutdown
+    shutdown:
+      enabled: true
     health:
       show-details: always
 

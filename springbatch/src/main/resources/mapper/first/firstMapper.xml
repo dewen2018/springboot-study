@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dewen.model.dao.first.FirstDao">
+    <select id="firstDataAccess" resultType="java.util.Map">
+		SELECT NOW() AS CURRENTTIME
+		      ,'MYSQL_FIRST' AS TYPE
+	</select>
+
+
+    <select id="getListPeople" parameterType="hashmap" resultType="people">
+		SELECT FIRST_NAME, LAST_NAME
+		FROM PEOPLE LIMIT #{_skiprows,jdbcType=INTEGER},#{_pagesize,jdbcType=INTEGER}
+	</select>
+</mapper>

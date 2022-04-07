@@ -24,6 +24,7 @@
 <!--        <module>baidu-uid</module>-->
 <!--        <module>enable-config</module>-->
 <!--        <module>improved-throughput</module>-->
+<!--        <module>druid-use</module>-->
     </modules>
 
     <properties>
