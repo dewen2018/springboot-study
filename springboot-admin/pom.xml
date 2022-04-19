@@ -21,7 +21,7 @@
 
 
     <modules>
-        <module>adminclient</module>
+<!--        <module>adminclient</module>-->
         <module>adminserver</module>
         <module>adminclient2</module>
     </modules>

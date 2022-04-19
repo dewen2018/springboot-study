@@ -1,0 +1,38 @@
+# 多数据源配置及其对应的方言
+#primary
+spring:
+  primary:
+    datasource:
+      url: jdbc:mysql://localhost:3307/test2?autoReconnect=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+#secondary
+  secondary:
+    datasource:
+      url: jdbc:mysql://localhost:3307/test8?autoReconnect=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      primary-dialect: org.hibernate.dialect.MySQL5Dialect
+      secondary-dialect: org.hibernate.dialect.MySQL5Dialect
+    open-in-view: true
+    show-sql: true
+
+#springBoot2.x默认使用的连接池是hikari，号称是最快的连接池，用来替换druid的。
+#最大连接数
+#spring.datasource.hikari.maximum-pool-size=20
+##连接超时毫秒
+#spring.datasource.hikari.connection-timeout=60000
+##空闲的连接的生命时长毫秒
+#spring.datasource.hikari.idle-timeout=60000
+##连接的生命时长毫秒
+#spring.datasource.hikari.max-lifetime=60000
+##验证连接有效性毫秒
+#spring.datasource.hikari.validation-timeout=3000
+##登录超时毫秒
+#spring.datasource.hikari.login-timeout=5

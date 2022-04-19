@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多视频播放</title>
+    <style>
+        div {
+            height: 400px;
+            width: 600px;
+            margin-bottom: 10px;
+            margin-right: 50px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="a1"></div>
+<div id="a2"></div>
+<div id="a3"></div>
+<div id="a4"></div>
+<div id="a5"></div>
+<div id="a6"></div>
+<div id="a7"></div>
+<div id="a8"></div>
+<p>
+    <input type="button" name="button7" value="1-播放/暂停" onClick="CKobject.getObjectById('ckplayer_a1').playOrPause();"/>
+    <input type="button" name="button8" value="2-播放/暂停" onClick="CKobject.getObjectById('ckplayer_a2').playOrPause();"/>
+    <input type="button" name="button7" value="3-播放/暂停" onClick="CKobject.getObjectById('ckplayer_a3').playOrPause();"/>
+    <input type="button" name="button8" value="4-播放/暂停" onClick="CKobject.getObjectById('ckplayer_a4').playOrPause();"/>
+    <input type="button" name="button7" value="5-播放/暂停" onClick="CKobject.getObjectById('ckplayer_a5').playOrPause();"/>
+    <input type="button" name="button8" value="6-播放/暂停" onClick="CKobject.getObjectById('ckplayer_a6').playOrPause();"/>
+    <input type="button" name="button7" value="7-播放/暂停" onClick="CKobject.getObjectById('ckplayer_a7').playOrPause();"/>
+    <input type="button" name="button8" value="8-播放/暂停" onClick="CKobject.getObjectById('ckplayer_a8').playOrPause();"/>
+    <!--<input type="button" name="button9" value="2-全屏" onClick="CKobject.getObjectById('ckplayer_a2').fullScreen();" />-->
+</p>
+<script type="text/javascript" src="ckplayer/ckplayer.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var flashvars = {
+        f: './video/abc.mp4',
+        c: 0,
+        p: 1,
+        b: 0,
+        i: '/static/images/letitgo.jpg',
+        my_url: encodeURIComponent(window.location.href)
+    };
+    var video = ['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4'];
+    CKobject.embed('/ckplayer/ckplayer/ckplayer.swf', 'a1', 'ckplayer_a1', '100%', '100%', false, flashvars, video);
+
+    var flashvars2 = {
+        f: './video/abc.mp4',
+        c: 0,
+        p: 1,
+        b: 0,
+        i: '/static/images/letitgo.jpg',
+        my_url: encodeURIComponent(window.location.href)
+    };
+    var video2 = ['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4'];
+    CKobject.embed('/ckplayer/ckplayer/ckplayer.swf', 'a2', 'ckplayer_a2', '100%', '100%', false, flashvars2, video2);
+
+    var flashvars3 = {
+        f: './video/abc.mp4',
+        c: 0,
+        p: 1,
+        b: 0,
+        i: '/static/images/letitgo.jpg',
+        my_url: encodeURIComponent(window.location.href)
+    };
+    var video3 = ['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4'];
+    CKobject.embed('/ckplayer/ckplayer/ckplayer.swf', 'a3', 'ckplayer_a3', '100%', '100%', false, flashvars3, video3);
+
+    var flashvars4 = {
+        f: './video/abc.mp4',
+        c: 0,
+        p: 1,
+        b: 0,
+        i: '/static/images/letitgo.jpg',
+        my_url: encodeURIComponent(window.location.href)
+    };
+    var video4 = ['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4'];
+    CKobject.embed('/ckplayer/ckplayer/ckplayer.swf', 'a4', 'ckplayer_a4', '100%', '100%', false, flashvars4, video4);
+
+    var flashvars5 = {
+        f: './video/abc.mp4',
+        c: 0,
+        p: 1,
+        b: 0,
+        i: '/static/images/letitgo.jpg',
+        my_url: encodeURIComponent(window.location.href)
+    };
+    var video5 = ['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4'];
+    CKobject.embed('/ckplayer/ckplayer/ckplayer.swf', 'a5', 'ckplayer_a5', '100%', '100%', false, flashvars5, video5);
+
+    var flashvars6 = {
+        f: './video/abc.mp4',
+        c: 0,
+        p: 1,
+        b: 0,
+        i: '/static/images/letitgo.jpg',
+        my_url: encodeURIComponent(window.location.href)
+    };
+    var video6 = ['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4'];
+    CKobject.embed('/ckplayer/ckplayer/ckplayer.swf', 'a6', 'ckplayer_a6', '100%', '100%', false, flashvars6, video6);
+
+    var flashvars7 = {
+        f: './video/abc.mp4',
+        c: 0,
+        p: 1,
+        b: 0,
+        i: '/static/images/letitgo.jpg',
+        my_url: encodeURIComponent(window.location.href)
+    };
+    var video7 = ['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4'];
+    CKobject.embed('/ckplayer/ckplayer/ckplayer.swf', 'a7', 'ckplayer_a7', '100%', '100%', false, flashvars7, video7);
+
+    var flashvars8 = {
+        f: './video/abc.mp4',
+        c: 0,
+        p: 1,
+        b: 0,
+        i: '/static/images/letitgo.jpg',
+        my_url: encodeURIComponent(window.location.href)
+    };
+    var video8 = ['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4'];
+    CKobject.embed('/ckplayer/ckplayer/ckplayer.swf', 'a8', 'ckplayer_a8', '100%', '100%', false, flashvars8, video8);
+</script>
+</body>
+</html>
