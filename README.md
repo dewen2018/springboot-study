@@ -62,3 +62,4 @@
 31.exportpdfexcel
 	导出为pdf
 	xssfwriter导出大量数据到excel
+32.influxdb
