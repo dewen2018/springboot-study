@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>CKplayer MINI风格演示</title>
+    <style>
+        body {
+            padding: 20px;
+            font: 12px/1.6 '微软雅黑', 'Microsoft YaHei', Arial;
+        }
+
+        .videos p {
+            display: block;
+            width: 600px;
+            height: 450px;
+            background: #000;
+            clear: both;
+        }
+
+        #myvideo3 {
+            width: 320px;
+            height: 240px;
+        }
+    </style>
+</head>
+<body style="padding:20px;">
+<script type="text/javascript" src="ck.js?57" charset="utf-8"></script>
+<h1>CKplayer MINI风格演示</h1>
+<div class="videos">
+    实例一、js 风格调用：(更多风格和示例请访问:<a href="http://www.fufuok.com/demo/ckplayer/mini.html" target="_blank">在线演示</a>)
+    <script type="text/javascript" src="mini.js" charset="utf-8"></script>
+    <p id="myvideo">CKplayer实例一</p>
+    <br/>
+    实例二、xml 风格调用：
+    <p id="myvideo2">CKplayer实例二</p>
+    <br/>
+    实例三、小窗口视频时 MINI 风格用处更大：
+    <p id="myvideo3">CKplayer实例三</p>
+</div>
+<script type="text/javascript">
+
+    /**
+     实例一、最简调用并使用 js 风格，当 x 参数为空时，自动调用 js 风格定义。方式一。PS：可以将默认设置在 ck.js 里修改好，调用的时候只需要 flashvars 参数就可以了：
+     C.K(flashvars);
+     **/
+    //C.K({f:"http://movie.ks.js.cn/flv/2011/11/8-1.flv",x:""});
+    C.K({
+        f: "http://img.ksbbs.com/asset/Mon_1605/0ec8cc80112a2d6.mp4",
+        x: "",
+        i: "img.jpg",
+        p: 0,
+        m: 1
+    }, "myvideo", 600, 450);
+    /**
+     最简调用，单独视频地址，方式二，此方法必须有 f v x c 四个参数！可以去掉 &p=0，加上主要是不让其自动播放：
+     **/
+    //C.K("f=http://movie.ks.js.cn/flv/2012/02/6-1.flv&p=0&v=85&x=&c=0","myvideo",600,450);
+
+
+    /**
+     实例二、完整参数调用：
+     C.K(flashvars, id, width, height, params);
+     【flashvars】：可以有两种格式表示
+     1、格式一：
+     {
+         v : 85,
+         p : 1,
+         f : "",
+         i : "",
+         d : "",
+         u : "",
+         l : "",
+         r : "",
+         t : 0,
+         e : 3,
+         a : "",
+         s : 0,
+         x : "ckplayer.xml",
+         c : 0,
+         b : "#000000",
+         h : 0,
+         m : 0,
+         g : 0,
+         j : 0,
+         o : 0
+     }
+     注意，参数需要用 {} 括起来，参数含义与官方的 ckplayer.js 是一致的，对应解释为：
+     v：ckplayer_volume，视频默认音量 0-100 之间，默认为 85。
+     p：ckplayer_play，是否自动播放，可以为 1 或 0，默认为 1，参数不为 1 时播放器加载完成后均为暂停状态。
+     f：ckplayer_flv，视频地址，默认为空，可以是单独视频地址、url 地址列表文件、xml 地址列表文件、Flash 地址文件这四种情况。（注意对应修改 s 参数的值，即 ckplayer_style）
+     i：ckplayer_loadimg，视频播放器初始图片地址，即封面图片，默认为空。
+     d：ckplayer_pauseflash，暂停时播放的广告，只支持 Flash 和图片，默认为空。
+     u：ckplayer_pauseurl，暂停时播放广告图片的链接地址，默认为空。
+     l：ckplayer_loadadv，视频开始前播放的广告，可以是 图片/Flash/视频格式，默认为空。
+     r：ckplayer_loadurl，视频开始前广告的链接地址，主要针对视频广告，如果是 Flash 广告可以不填写，默认为空。
+     t：ckplayer_loadtime，视频开始前广告播放的秒数，只针对 Flash 或图片有效，默认为 0。
+     e：ckplayer_endstatus，视频结束后的动作，0 停止播放并发送js，1 是不发送 js 且重新循环播放，2 停止播放，默认为2。当为 0 时需要自定义函数：
+     function playerstop(){
+					alert("播放完成");
+				}
+     a：ckplayer_pat，只有在使用 Flash 加密地址传递时有效，需要 f 和 s 参数配合，以及你自定义的 geturl.swf 文件配合，f：ckplayer_flv 参数也可以为 getflv.php?id=[$pat] 这样的格式，相当于 Flash 加密地址传递，其中的 pat 是有效的,可以通过这里传递参数后得到视频播放地址给播放器。
+     s：ckplayer_style，f 参数的传递方式，0 是普通视频地址，1 是视频地址列表文件，2 是 xml 地址列表文件，3 是 Flash 加密地址解析，默认为 0 普通视频地址文件播放。
+     x：ckplayer_xml，皮肤配置文件，如果为空的话将使用 js 文件配置，默认为官方皮肤 ckplayer.xml，要修改为其他皮肤只需要下载后改这个文件名就可以了，比如网易皮肤 ckplayer_163.xml。
+     c：ckplayer_default，读取文本配置，此参数具有非常强大的功能，非 0 值时调用本地 ckplayer.txt 配置文件（比如外站引用视频只需一个参数即可）说来话长，请到网站了解详情。
+     b：ckplayer_bgcolor，该参数以适应站外调用时有些论坛自动设置透明度的问题。
+     h：ckplayer_http，默认为0，定义 http 视频流采用按关键帧拖动还是按关键时间点拖动，0是按关键帧，1是按关键时间点。
+     m：ckplayer_load，默认为0，为1时不自动加载视频，选择是否采用点击播放按钮时再加载视频，这个参数的功能是在同页面加载多个视频时，有些视频可以先不加载，省带宽。
+     g：ckplayer_start，默认为0，开头跳过时间，这两个参数可以定义按指定时间进行播放的功能和提前结束的功能，该功能的用处一是可以记录用户已播放到的时间下次打开该视频时直接从指定时间进行播放,二是可以做跳过片头和片尾的功能。
+     j：ckplayer_ending，同上，默认为0，提前结束时间。
+     o：附加参数，非 CKplayer 官方参数，可选，默认值为 0，当值为 1 时，可加载站外视频 Flash 地址，如优酷分享中的 Flash 地址等，相当于使用 <embed> 标签加载站外 Flash 视频。
+     2、格式二，把格式一中的参数用 & 连接起来，如："f=http://movie.ks.js.cn/flv/2011/11/8-1.flv&p=1&x=ckplayer.xml"，我懒了下，没进一步处理，一般只在简单调用时用，用这种方式时必须有 f p x 三个参数，见[最简调用示例]。
+     【id】：
+     1、默认值为：myvideo，可在 ck.js 中修改。指定 id 后，播放器将插入到页面中该 id 对应的标签中，同时播放器的 id 为 "ck" + id。
+     2、id 为空，或 id 在页面中不存在，则在当前位置显示播放器。
+     【width】：
+     播放器宽度，默认值为 600。
+     【height】：
+     播放器高度，默认值为 486。PS：如果播放器控制条不是全隐藏方式，是显示在视频下方的，这里的高度需要设置为：视频本身高度 + 播放器控制条高度（包含进度条高度）。
+     【params】：
+     Flash 中 object 的 params 的参数，可自行配置，比如：<param name="wmode" value="transparent" />，默认值为：
+     {
+         allowfullscreen : "true",
+         allowscriptaccess : "always"
+     }
+     **/
+    C.K({
+            v: 85,
+            p: 1,
+            f: "http://img.ksbbs.com/asset/Mon_1605/0ec8cc80112a2d6.mp4",
+            i: "",
+            d: "ttjt.jpg",
+            u: "http://www.08z.com/",
+            l: "http://www.dicos.com.cn/flash/food01.flv",
+            r: "http://www.dicos.com.cn/",
+            t: 15,
+            e: 3,
+            a: "",
+            s: 0,
+            x: "ckplayer_mini.xml",
+            c: 0,
+            b: "#000000",
+            h: 0,
+            m: 0,
+            g: 0,
+            j: 0,
+            o: 0
+        }, "myvideo2", 600, 450, {
+            allowfullscreen: "true",
+            allowscriptaccess: "always",
+            quality: "high",
+            wmode: "transparent",
+            bgcolor: "#000000"
+        }
+    );
+
+
+    /**
+     实例三、小窗口：
+     C.K(id, flashvars);
+     **/
+    C.K({
+        f: "http://img.ksbbs.com/asset/Mon_1605/0ec8cc80112a2d6.mp4",
+        p: 0,
+        x: "",
+        m: 1,
+        i: "mini.jpg"
+    }, "myvideo3", 320, 240);
+
+</script>
+<p>欢迎使用CKplayer网页播放器</p>
+<p style="color:#00f">介绍：<a href="http://www.fufuok.com/flv-player-ckplayer.html"><strong>优秀的flv网页播放器，支持高清f4v,mp4,rtmp，支持广告</strong></a>
+</p>
+<p style="color:#f00">推荐：<a href="http://www.fufuok.com/demo/ckplayer/"><strong>CKplayer 封装 JS 调用方案及使用指南 by
+    Fufu</strong></a></p>
+<p style="color:#00f">下载：<a href="http://www.fufuok.com/ckplayer-skin-sina.html"><strong>CKplayer 新浪(土豆)风格 by
+    Fufu</strong></a></p>
+<p style="color:#00f">下载：<a href="http://www.fufuok.com/ckplayer-skin-mini.html"><strong>CKplayer Mini迷你风格 by
+    Fufu</strong></a></p>
+<p style="color:#00f">下载：<a href="http://www.fufuok.com/ckplayer-skin-163.html"><strong>CKplayer 网易风格 by
+    Fufu</strong></a></p>
+<p style="color:#F00"><strong>注意：本播放器需要放到IIS里方可正常使用，直接打开无法使用</strong></p>
+<p>本播放器为免费软件，您可以放心使用于商业或非商业的网站</p>
+<p>有任何使用方面的问题请直接访问CKplayer官方网站：<a href="http://www.ckplayer.com" target="_blank">http://www.ckplayer.com</a></p>
+</body>
+</html>

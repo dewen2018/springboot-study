@@ -7,10 +7,10 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.5</version>
+        <version>2.5.12</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>dewen</groupId>
+    <groupId>com.dewen</groupId>
     <artifactId>dewensuper</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -20,7 +20,11 @@
 
     <!-- child module -->
     <modules>
-        <module>callpython</module>
+<!--        <module>callpython</module>-->
+<!--        <module>baidu-uid</module>-->
+<!--        <module>enable-config</module>-->
+<!--        <module>improved-throughput</module>-->
+<!--        <module>druid-use</module>-->
     </modules>
 
     <properties>

@@ -1,0 +1,5 @@
+influx:
+  url: http://127.0.0.1:8086
+  token: jZzwLs9MhcYCC1xX4zWbIR2T5MM_quQ8rm5awQEdO7Pz4sOl4PJ2I5lgvgMBUzU0WHhhuezBmHtCZa0k7eah3Q==
+  org: dewen
+  bucket: dewen

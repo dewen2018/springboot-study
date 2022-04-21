@@ -1,0 +1,18 @@
+3.使用@ComponentScan()定位扫包比@SpringBootApplication扫包更快
+
+
+4.默认tomcat容器改为Undertow（Jboss下的服务器，Tomcat吞吐量5000，Undertow吞吐量8000）
+    <exclusions>
+      <exclusion>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-tomcat</artifactId>
+      </exclusion>
+    </exclusions>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-undertow</artifactId>
+    </dependency>
+
+5.使用 BufferedWriter 进行缓冲
+6.

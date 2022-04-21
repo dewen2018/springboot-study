@@ -1,0 +1,41 @@
+server:
+  port: 8311
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/dewen2018/springcloud    # 配置git仓库的地址
+          search-paths: config-repo                             # git仓库地址下的相对地址，可以配置多个，用,分割。
+          username: dewen2018                                        # git仓库的账号
+          password: wenmn385138768                                    # git仓库的密码
+    bus:
+      refresh:
+        enabled: true
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  datasource:
+      url: jdbc:mysql://localhost:3307/springsecurity?useUnicode=true&characterEncoding=UTF-8
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: root
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+      #defaultZone: http://localhost:8001/eureka/,http://localhost:8002/eureka/,http://localhost:8003/eureka/
+
+#2.0代替的全部放开请使用*，或把需要开放的接口端点使用“,”隔开，如：env,health。
+#include: "*"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

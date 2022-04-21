@@ -1,0 +1,182 @@
+username root password rootroot
+下边两个是组织机构Organization
+dewen
+dewen
+
+https://www.jianshu.com/p/268fca65f10e
+
+Organization
+organization 是一组用户的工作空间，一个组下用户可以创建多个bucket
+
+bucket
+所有的 influxdb数据都存储在bucket中，bucket结合了数据库和保存期限（每条数据会被保留的时间）的概念，类似于RDMS的database的概念。bucket属于一个organization
+
+Measurement
+measurement是所有 tags fields 和时间的容器和RDMS的table的概念类似,是一个数据集的容器
+
+Fields
+数据属性包括field key 和 field value 分别存储在 _field和 _value当中, 并且一个measurement中必须包含至少一个filed
+
+Field key
+field key 是一个代表属性名称的字段，在示例数据中bees和ants就是field key
+
+Field value
+field value 是对应 field key 的值,在示例数据中在2019-08-18T00:00:00Z该时间点 bees的值为23，而ants的值为30
+
+Field set
+field set 表示在同一时间内 所有fields的集合
+
+Tags
+和Fields类似，Tags也有 key value。但与Fields不同的是，field key存储在_field列中 而tag key则是本省就是列
+
+tag key 和 tag value
+即tag 的 key 和 value 在Line Protocl中有更为直观的体现
+
+timestamp
+所有存储在influxdb中的数据都有一个_time列用来记录时间，在磁盘中以纳秒之间戳存储，但客户端查询时返回的是格式化的更易读的 RFC3339 UTC时间格式
+
+对于Fields 和 Tags 简单来说他们都是一组键值对的集合。在存储形式上，field 的key 被存储在一个名为_field的列中,而tag 的key则是以列头的形式存在的,该列的内容即为tag value。可以从示例数据中直观的看出其区别。
+
+另外值得注意的是，field 和 tag 都可以用来存储数据，但tag只能存储字符串类型数据，而filed既可以存储字符串类型又可以存储数值类型数据。
+
+那么我是否可以在tag中存储字符串形式的数据呢？
+
+当然可以但其不可以参与flux查询中的mean() max() 等聚合函数的计算。所以field 和 tag 还是有着本质上的区别的。
+
+
+
+
+
+
+
+
+
+window
+window函数根据时间将数据分组.
+
+参数
+
+every:
+
+every 指定每个时间窗口的时间，例如 every = 5 那么 时间窗口可以是 0m-5m，5m-10m，10m-15m。默认为 period 的值
+
+period
+
+period 明确在每个时间窗口中需要从时间窗口起始到多久的数据，例如时间窗口为10m-15m period = 3 则只取10m-13m的数据，13m-15m的数据会被抛弃。默认为 every 的值
+
+offset
+
+offset 指定每个时间窗口的时间偏移量，例如时间窗口为10m-15m offset = 3 那么会取 13m-15m的数据，10m-13m的数据会被抛弃，但注意当offset = every 时 offset不生效。且offset大于every 时 生效offset = offset % every
+
+min
+参数
+
+column 求最小值的列，默认为_value
+
+取每个分组中最小值
+
+max
+参数
+
+column 求最大值的列，默认为_value
+
+取每个分组最大值
+
+mean
+参数
+
+column 求平均值的列，默认为_value
+
+对每个分组的数据求平局值
+
+bottom
+参数
+
+columns 按那些列进行排序
+
+n 返回最上层 n 条数据
+
+根据columns进行排序并返回最上层 n 条记录
+
+count
+参数
+
+columns 按那列统计个数
+
+统计数据个数
+
+cumulativeSum
+参数
+
+columns 按那列进行累加
+
+根据给定列对该列数据进行累加，模拟输出忽略 _start, _stop 等列:
+
+cumulativeSum
+参数
+
+columns 按那列进行累加
+
+根据给定列对该列数据进行累加，模拟输出忽略 _start, _stop 等列:
+
+原始数据：
+
+_measurement	_field	62
+temperature	wxm	62
+temperature	wxm	65
+temperature	wxm	81.5
+temperature	wxm	81.5
+cumulativeSum函数执行后：
+
+_measurement	_field	62
+temperature	wxm	62
+temperature	wxm	127
+temperature	wxm	208.5
+temperature	wxm	290
+group
+参数
+
+columns 按那些列进行分组操作 默认值为[]
+
+mode:
+
+mode 可以是以下值
+
+"by",按 columns 内指定的列进行分组
+
+"expect",按除了columns 列中指定的列进行分组
+
+columns
+参数
+
+column存放列标签名的列。
+
+返回所有列标签名并存储在指定的列中默认为_value 通过column参数指定
+
+derivative
+参数
+
+unit 求多长时间内的变化速率。变化速率=（下一个值-上一个值）/（下一个时间-上一个时间）* unit 默认值1s
+
+nonNegative变化速率是否可以是负值，如果是负数influxdb会假定前一个值为0 默认值true
+
+columns指定计算变化速率的列 默认值 ["_value"]
+
+timeColumn手动指定时间列 默认值 "_time"
+
+difference
+参数
+
+nonNegative是否允许差值为负数，如果是负数influxdb会假定前一个值为0 默认值false
+
+计算相邻两行的差值（next-pre）
+
+keepFirst是否保留第一行，默认值为false
+
+distinct
+参数
+
+column 指定按那列去重
+
+按指定列去重
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+ 	
+ 	<property name="LOG_DIR" value="/logs/netmix" />
+ 	<property name="LOG_PATH_NAME" value="${LOG_DIR}/stdout.log" />
+ 	<property name="GW_LOG_PATH_NAME" value="${LOG_DIR}/stdout_gw.log" />
+ 	
+	<!-- 출력설정 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+ 
+ 
+   <root level="INFO">
+		<appender-ref ref="console"/>
+	</root>
+ 
+	<!-- 스프링 -->
+	<logger name="org.springframework" level="ERROR" > <appender-ref ref="console" /> </logger>
+	<logger name="o.s.w.c.s.StandardServletEnvironment" level="ERROR" > <appender-ref ref="console" /> </logger>
+	<logger name="o.s.b.f.s.DefaultListableBeanFactory" level="ERROR" > <appender-ref ref="console" /> </logger>
+	<logger name="o.s.c.e.PropertySourcesPropertyResolver" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="jdbc.audit" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="jdbc.connection" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="jdbc.resultset" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="jdbc.sqltiming" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="log4jdbc.debug" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="org.mybatis.spring.SqlSessionUtils" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="sun.rmi.loader" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="sun.rmi.server.ref" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="javax.management.remote.rmi" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="sun.rmi.transport.tcp" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="sun.rmi.transport.misc" level="ERROR" > <appender-ref ref="console" /> </logger>
+ 	<logger name="sun.rmi.dgc" level="ERROR" > <appender-ref ref="console" /> </logger>
+	<logger name="o.apache.tomcat.util.net.NioEndpoint" level="ERROR" > <appender-ref ref="console" /> </logger>
+  	
+</configuration>

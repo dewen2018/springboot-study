@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dewen.model.dao.second.SecondDao">
+    <select id="secondDataAccess" resultType="map">
+		SELECT NOW() AS CURRENTTIME
+		      ,'MYSQL_SECOND' AS TYPE
+	</select>
+    <select id="firstDataAccess" resultType="map">
+		SELECT NOW() AS CURRENTTIME
+		      ,'MYSQL_SECOND_FIRST' AS TYPE
+	</select>
+
+
+    <insert id="insertPeople" parameterType="people">
+		insert into people2(first_name,last_name) values (#{first_name,jdbcType=VARCHAR},#{last_name,jdbcType=VARCHAR})
+	</insert>
+</mapper>

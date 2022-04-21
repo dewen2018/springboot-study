@@ -1,5 +1,18 @@
 server:
   port: 8081
+# 自定义配置信息用于"/actuator/info"读取
+info:
+  name: dewen
+  age: 18
+  phone: 110
+  pos: CEO
+  app:
+    #从pom.xml中获取,pom.xml中需build中加入插件spring-boot-maven-plugin
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
+    spring-boot-version: @project.version@
+    encoding: @project.build.sourceEncoding@
 
 spring:
   application:
@@ -11,7 +24,10 @@ spring:
     admin:
       client:
         # admin server addr
-        url: http://127.0.0.1:9090
+        url: http://127.0.0.1:80
+        # register server username and password
+        username: dewen
+        password: dewen
         instance:
           service-url: http://127.0.0.1:${server.port}
           prefer-ip: true
@@ -30,9 +46,15 @@ management:
   endpoints:
     web:
       exposure:
+        # 可以打开所有的监控点
         include: "*"
   endpoint:
+    # allow shutdown
+    # 开启优雅关机
+    shutdown:
+      enabled: true
     health:
+      # 展示细节，除了always之外还有when-authorized、never，默认值是never
       show-details: always
 
 logging:
@@ -47,5 +69,3 @@ logging:
   # log style
   pattern:
     file: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx'
-
-
