@@ -1,0 +1,26 @@
+# 分布式文件系统FDFS配置
+fdfs:
+  # 连接超时时间
+  connect-timeout: 600
+  # 读取超时时间
+  so-timeout: 1500
+  # 缩略图的宽高
+  thumb-image:
+    height: 150
+    width: 150
+  # tracker服务配置地址列表
+  tracker-list: 127.0.0.1:22122
+  pool:
+    jmx-enabled: false
+    # 从池中借出的对象的最大数目
+    max-total: 153
+    # 获取连接时的最大等待毫秒数100
+    max-wait-millis: 100
+  web-server-url: http://127.0.0.1/
+  spring:
+    http:
+      multipart:
+        # 最大支持文件大小
+        max-file-size: 100MB
+        # 最大支持请求大小
+        max-request-size: 100MB
