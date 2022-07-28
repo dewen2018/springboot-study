@@ -1,65 +1,28 @@
-#spring:
-#  profiles:
-#    active: dev
-
-logging:
-  config: classpath:logging/logback.xml
-
-#---
+server:
+  port: 8082
+  servlet:
+    context-path: /node2
 
 spring:
   datasource:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/batch?serverTimezone=Asia/Seoul&autoreconnect=true
-      username: root
-      password: 1q2w3e4r1!
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      validation-query: SELECT 1
-      test-on-borrow: true
-      test-on-return: false
-    first:
-      url: jdbc:mysql://localhost:3306/adb?serverTimezone=Asia/Seoul&autoreconnect=true
-      username: root
-      password: 1q2w3e4r1!
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      validation-query: SELECT 1
-      test-on-borrow: true
-      test-on-return: false
-    second:
-      url: jdbc:mysql://localhost:3306/bdb?serverTimezone=Asia/Seoul&autoreconnect=true
-      username: root
-      password: 1q2w3e4r1!
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      validation-query: SELECT 1
-      test-on-borrow: true
-      test-on-return: false
-#---
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://119.23.47.158:33007/spring_batch
+    username: root
+    password: root
 
-# spring.profiles.active=prod
-#spring:
-#  profiles: prod
-#  datasource:
-#    hikari:
-#      jdbc-url: jdbc:mysql://localhost:3306/batch?serverTimezone=Asia/Seoul&autoreconnect=true
-#      username: root
-#      password: 1q2w3e4r1!
-#      driver-class-name: com.mysql.cj.jdbc.Driver
-#      validation-query: SELECT 1
-#      test-on-borrow: true
-#      test-on-return: false
-#    first:
-#      jdbc-url: jdbc:mysql://localhost:3306/adb?serverTimezone=Asia/Seoul&autoreconnect=true
-#      username: root
-#      password: 1q2w3e4r1!
-#      driver-class-name: com.mysql.cj.jdbc.Driver
-#      validation-query: SELECT 1
-#      test-on-borrow: true
-#      test-on-return: false
-#    second:
-#      jdbc-url: jdbc:mysql://localhost:3306/bdb?serverTimezone=Asia/Seoul&autoreconnect=true
-#      username: root
-#      password: 1q2w3e4r1!
-#      driver-class-name: com.mysql.cj.jdbc.Driver
-#      validation-query: SELECT 1
-#      test-on-borrow: true
-#      test-on-return: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+
+  # 容器启动是否执行所有的job
+  batch:
+    job:
+      enabled: false
+
+
+
+# 每次批量处理的数据量，默认为5000
+#batch-size: 5000
