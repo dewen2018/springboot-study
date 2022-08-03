@@ -76,4 +76,8 @@
 37flowable
 38jmh
 	Java Microbenchmark Harness微基准测试框架
+39lbs
+	LBS (Location Based Services，基于位置服务)
+	mongodb操作复习
+	注意redis须高于3.2以上版本，才有geohash模块，zset保存数据，可以有序返回，但是不准确。
 	

@@ -1,0 +1,69 @@
+redis版本高于3.2
+redis 实现附近的人功能主要通过Geo模块的六个命令。
+    GEOADD：将给定的位置对象（纬度、经度、名字）添加到指定的key;
+    GEOPOS：从key里面返回所有给定位置对象的位置（经度和纬度）;
+    GEODIST：返回两个给定位置之间的距离;
+    GEOHASH：返回一个或多个位置对象的Geohash表示;
+    GEORADIUS：以给定的经纬度为中心，返回目标集合中与中心的距离不超过给定最大距离的所有位置对象;
+    GEORADIUSBYMEMBER：以给定的位置对象为中心，返回与其距离不超过给定最大距离的所有位置对象。
+
+
+GEOADD key longitude latitude member [longitude latitude member ...]
+GEORADIUS key longitude latitude radius m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [ASC|DESC] [COUNT count] [STORE key] [STORedisT key]
+范围单位：m | km | ft | mi --> 米 | 千米 | 英尺 | 英里。
+
+WITHDIST：在返回位置对象的同时，将位置对象与中心之间的距离也一并返回。距离的单位和用户给定的范围单位保持一致。
+WITHCOORD：将位置对象的经度和维度也一并返回。
+WITHHASH：以 52 位有符号整数的形式，返回位置对象经过原始 geohash 编码的有序集合分值。这个选项主要用于底层应用或者调试，实际中的作用并不大。
+ASC | DESC：从近到远返回位置对象元素 | 从远到近返回位置对象元素。
+COUNT count：选取前N个匹配位置对象元素。（不设置则返回所有元素）
+STORE key：将返回结果的地理位置信息保存到指定key。
+STORedisT key：将返回结果离中心点的距离保存到指定key。
+
+GEORADIUS hotel 119.98866180732716    30.27465803229662 500 m WITHCOORD
+
+Redis内部使用有序集合(zset)保存用户的位置信息，zset中每个元素都是一个带位置的对象，元素的score值为通过经、纬度计算出的52位geohash值。
+
+
+利弊分析
+
+redis实现附近的人效率比较高，集成也比较简单，而且还支持对距离排序。不过，结果存在一定的误差，要想让结果更加精确，还需要手动将用户中心位置与其他用户位置计算距离后，再一次进行筛选。
+
+
+
+mongodb方法在
+http://localhost:8082/node2/mongo/adada
+// 创建索引，报错
+db.hotel.createIndex({'location':"2d"}, {"bits":11111})
+
+db.hotel.find()
+// 创建索引
+db.hotel.createIndex({'location':"2d"}, {"bits":32})
+
+db.hotel.aggregate({
+    $geoNear:{
+        near: [115.999567,28.681813], // 当前坐标
+        spherical: true, // 计算球面距离
+        distanceMultiplier: 6378137, // 地球半径,单位是米,那么的除的记录也是米
+        maxDistance: 2000/6378137, // 过滤条件2000米内，需要弧度
+        distanceField: "distance" // 距离字段别名
+    }
+})
+
+db.hotel.aggregate({
+    $geoNear:{
+        near: [115.999567,28.681813],
+        spherical: true, // 计算球面距离
+        distanceMultiplier: 6378137,
+        maxDistance: 2000/6378137,
+        distanceField: "distance"
+    }
+})
+
+db.hotel.aggregate(
+//{ "$geoNear" : { "maxDistance" : 2000/6378137, "distanceMultiplier" : 6378137.0, "near" : [115.999567, 28.681813], "spherical" : true, "distanceField" : "distance"}}
+{ "$geoNear" : { "query" : {}, "maxDistance" : 3.135711885774796E-5, "distanceMultiplier" : 6378.137, "near" : [115.999567, 28.681813], "spherical" : true, "distanceField" : "dis"}}, { "$limit" : 10}
+)
+
+
+https://docs.spring.io/spring-data/mongodb/docs/current-SNAPSHOT/reference/html/#mongodb-template-update
