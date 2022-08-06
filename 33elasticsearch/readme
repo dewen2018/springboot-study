@@ -1,0 +1,26 @@
+logging:
+  level:
+    org:
+    网络
+#      apache:
+#        http: TRACE
+    查询相关
+      elasticsearch:
+        client: TRACE
+        不生效
+#      springframework:
+#        index:
+#          search:
+#            slowlog:
+#              query: DEBUG
+#        data:
+#          elasticsearch:
+#            core: DEBUG
+
+
+
+1.employee crud
+2.ciry crud 高亮及自定义方法
+3.person RestHighLevelClient常规，及复杂查询
+4.article偏向于RestHighLevelClient的crud,及updataByQuery
+5.order常规crud,高亮查询

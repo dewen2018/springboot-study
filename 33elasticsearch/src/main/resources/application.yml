@@ -1,0 +1,27 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /node2
+
+elasticSearch:
+  url: 127.0.0.1:9200
+
+logging:
+  level:
+    org:
+      apache:
+        http: TRACE
+      elasticsearch:
+        client: DEBUG
+#      springframework:
+#        index:
+#          search:
+#            slowlog:
+#              query: DEBUG
+#        data:
+#          elasticsearch:
+#            core: DEBUG
+
+# 不开启的话，排序不生效
+knife4j:
+  enable: true
