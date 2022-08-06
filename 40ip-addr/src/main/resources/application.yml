@@ -1,0 +1,8 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /node2
+
+ip2region:
+  enabled: true
+  dbFile: data/ip2region.xdb
