@@ -81,4 +81,5 @@
 	mongodb操作复习
 	注意redis须高于3.2以上版本，才有geohash模块，zset保存数据，可以有序返回，但是不准确。
 40ip-addr
-	显示 IP 归属地
+	1.显示 IP 归属地
+	2.IpLongUtils，存储IPv4地址时，应该使用32位的无符号整数（UNSIGNED INT）来存储IP地址，而不是使用字符串。
