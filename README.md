@@ -91,3 +91,5 @@ sofaboot
 	mybatis数据脱敏
 43flyway
 	Flyway，自动化实现数据库版本控制
+44seckill
+	秒杀demo，参考大牛demo

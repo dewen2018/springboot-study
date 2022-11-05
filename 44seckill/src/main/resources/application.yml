@@ -1,0 +1,46 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /node2
+
+#logging:
+#  level:
+#    org:
+#      apache:
+#        http: TRACE
+#      elasticsearch:
+#        client: DEBUG
+
+# 不开启的话，排序不生效
+knife4j:
+  enable: true
+  #  production: false
+  basic:
+    enable: false
+    username: dewen
+    password: dewen
+  setting:
+    # 禁用默认的Footer显示，如果要自定义的话该属性必须设置为false,否则不会生效
+    enableFooter: false
+    # 该属性为Boolean值,默认false，如果开发者要自定义Footer内容,该选项设置为true
+    enableFooterCustom: true
+    # 最终在Ui界面底部显示的Footer内容，支持Markdown格式
+    footerCustomContent: Apache License 2.0 | Copyright  2022-[Dewen's Project](https://github.com/dewen2018)
+    # enableOpenApi: false
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3307/dewen_seckill?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 1
+    jedis:
+      pool:
+        max-idle: 8
+        max-active: 10000
+    timeout: 100000
