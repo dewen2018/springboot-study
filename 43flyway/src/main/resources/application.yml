@@ -1,0 +1,43 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /node2
+
+#logging:
+#  level:
+#    org:
+#      apache:
+#        http: TRACE
+#      elasticsearch:
+#        client: DEBUG
+
+# 不开启的话，排序不生效
+knife4j:
+  enable: true
+  #  production: false
+  basic:
+    enable: false
+    username: dewen
+    password: dewen
+  setting:
+    # 禁用默认的Footer显示，如果要自定义的话该属性必须设置为false,否则不会生效
+    enableFooter: false
+    # 该属性为Boolean值,默认false，如果开发者要自定义Footer内容,该选项设置为true
+    enableFooterCustom: true
+    # 最终在Ui界面底部显示的Footer内容，支持Markdown格式
+    footerCustomContent: Apache License 2.0 | Copyright  2022-[Dewen's Project](https://github.com/dewen2018)
+    # enableOpenApi: false
+spring:
+  flyway:
+    #是否启动,默认开启
+    enabled: true
+    #脚本存放路径
+    locations: classpath:db/migration
+    #当flyway第一次运行时，会在我们对应的数据库中新建一个记录脚本运行情况的
+    table: flyway_schema_history
+    # baseline-on-migrate: true
+    user: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3307/dewen_flyway?useUnicode=true&characterEncoding=utf8

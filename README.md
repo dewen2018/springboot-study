@@ -83,3 +83,11 @@
 40ip-addr
 	1.显示 IP 归属地
 	2.IpLongUtils，存储IPv4地址时，应该使用32位的无符号整数（UNSIGNED INT）来存储IP地址，而不是使用字符串。
+sofaboot
+	阿里巴巴SOFABoot增强springboot
+41mapstruct
+	mapstruct
+42datamask
+	mybatis数据脱敏
+43flyway
+	Flyway，自动化实现数据库版本控制
