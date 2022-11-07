@@ -1,0 +1,80 @@
+{
+  "serverUrl": "http://127.0.0.1",
+  "isStrict": false,
+  "allInOne": true,
+  "outPath": "C:/Users/86357/Desktop/wnm",
+  "coverOld": true,
+  "packageFilters": "com.dewen.*",
+  "md5EncryptedHtmlName": false,
+  "projectName": "Alex项目",
+  "skipTransientField": true,
+  "dataDictionaries": [
+    {
+      "title": "系统返回码",
+      "enumClassName": "com.dewen.enums.OrderEnum",
+      "codeField": "code",
+      "descField": "desc"
+    }
+  ],
+  "errorCodeDictionaries": [
+    {
+      "title": "title",
+      "enumClassName": "com.dewen.enums.OrderEnum",
+      "codeField": "code",
+      "descField": "desc"
+    }
+  ],
+  "revisionLogs": [
+    {
+      "version": "1.0",
+      "revisionTime": "2020年12月20日15:25:26",
+      "status": "创建",
+      "author": "dewen",
+      "remarks": "smart测试使用接口文档"
+    },
+    {
+      "version": "1.1",
+      "revisionTime": "2020年12月28日15:25:26",
+      "status": "修改",
+      "author": "dewen",
+      "remarks": "smart测试使用接口文档"
+    },
+    {
+      "version": "1.2.1",
+      "revisionTime": "2020年12月28日15:25:26",
+      "status": "修改",
+      "author": "dewen",
+      "remarks": "修改文档版本号"
+    }
+  ],
+  "errorCodes": [
+    {
+      "value": "200",
+      "type": "string",
+      "desc": "desc"
+    }
+  ],
+  "customResponseFields": [
+    {
+      "name": "name",
+      "desc": "desc",
+      "ownerClassName": "ownerClassName",
+      "value": "value"
+    }
+  ],
+  "requestHeaders": [
+    {
+      "name": "token",
+      "type": "string",
+      "desc": "desc",
+      "required": false,
+      "since": "-"
+    }
+  ],
+  "sourceCodePaths": [
+    {
+      "path": "src/main/java",
+      "desc": "测试"
+    }
+  ]
+}

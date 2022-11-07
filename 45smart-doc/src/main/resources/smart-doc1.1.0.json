@@ -1,0 +1,71 @@
+{
+  "serverUrl": "http://127.0.0.1:8080",
+  "isStrict": false,
+  "allInOne": true,
+  "outPath": "C:/Users/86357/Desktop/wnm",
+  "coverOld": true,
+  "packageFilters": "",
+  "md5EncryptedHtmlName": false,
+  "projectName": "Alex项目",
+  "skipTransientField": true,
+  "showAuthor": true,
+  "requestFieldToUnderline": false,
+  "responseFieldToUnderline": false,
+  "inlineEnum": true,
+  "recursionLimit": 7,
+  "revisionLogs": [
+    {
+      "version": "1.0",
+      "revisionTime": "2020年12月20日15:25:26",
+      "status": "创建",
+      "author": "dewen",
+      "remarks": "smart测试使用接口文档"
+    },
+    {
+      "version": "1.1",
+      "revisionTime": "2020年12月28日15:25:26",
+      "status": "修改",
+      "author": "dewen",
+      "remarks": "smart测试使用接口文档"
+    },
+    {
+      "version": "1.2.1",
+      "revisionTime": "2020年12月28日15:25:26",
+      "status": "修改",
+      "author": "dewen",
+      "remarks": "修改文档版本号"
+    }
+  ],
+  "customResponseFields": [
+    {
+      "name": "code",
+      "desc": "响应代码",
+      "value": "00000"
+    }
+  ],
+  "rpcApiDependencies": [
+    {
+      "artifactId": "com.dewen",
+      "groupId": "alex",
+      "version": "1.0.0"
+    }
+  ],
+  "rpcConsumerConfig": "src/main/resources/consumer-example.conf",
+  "apiObjectReplacements": [
+    {
+      "className": "org.springframework.data.domain.Pageable",
+      "replacementClassName": "com.power.doc.model.PageRequestDto"
+    }
+  ],
+  "apiConstants": [
+    {
+      "constantsClassName": "com.power.doc.constants.RequestParamConstant"
+    }
+  ],
+  "sourceCodePaths": [
+    {
+      "path": "src/main/java",
+      "desc": "测试"
+    }
+  ]
+}

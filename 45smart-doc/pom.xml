@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.smart-doc</groupId>
+    <artifactId>45smart-doc</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>45smart-doc</name>
+    <description>Springboot+Restful使用smart-doc生成API接口文档</description>
+
+    <properties>
+        <java.version>12</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--文档生成工具-->
+        <!-- https://mvnrepository.com/artifact/com.github.shalousun/smart-doc -->
+        <dependency>
+            <groupId>com.github.shalousun</groupId>
+            <artifactId>smart-doc</artifactId>
+            <version>2.6.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.shalousun</groupId>
+                <artifactId>smart-doc-maven-plugin</artifactId>
+                <version>2.6.1</version>
+                <configuration>
+                    <!--指定生成文档的使用的配置文件,配置文件放在自己的项目中-->
+                    <configFile>./src/main/resources/smart-doc2.6.1.json</configFile>
+                    <!--指定项目名称-->
+                    <projectName>Alex项目</projectName>
+                    <!--smart-doc实现自动分析依赖树加载第三方依赖的源码，如果一些框架依赖库加载不到导致报错，这时请使用excludes排除掉-->
+                    <excludes>
+                        <!--格式为：groupId:artifactId;参考如下-->
+                        <!--1.0.7版本开始你还可以用正则匹配排除,如：poi.* -->
+                        <exclude>com.alibaba:fastjson</exclude>
+                    </excludes>
+                    <!--自1.0.8版本开始，插件提供includes支持-->
+                    <!--smart-doc能自动分析依赖树加载所有依赖源码，原则上会影响文档构建效率，因此你可以使用includes来让插件加载你配置的组件-->
+                    <includes>
+                        <!--格式为：groupId:artifactId;参考如下-->
+                        <include>com.alibaba:fastjson</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!--如果不需要在执行编译时启动smart-doc，则将phase注释掉-->
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>html</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

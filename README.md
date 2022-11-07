@@ -94,3 +94,5 @@
 ## 44seckill
 	秒杀demo，参考大牛demo
 	nocosredisson，redisson分布式锁，参考他人为自己写的lua,学到了
+## 45smart-doc
+	升级版本至2.6.1，项目文档利器
