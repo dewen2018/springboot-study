@@ -1,0 +1,57 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'java'
+}
+
+group = 'com.dewen'
+version = '1.0.0'
+
+//编译后的.class文件的jdk版本
+sourceCompatibility = '11'
+//项目运行版本
+targetCompatibility = '11'
+
+//远程仓库，根据先后顺序，决定优先级
+repositories {
+    mavenLocal()
+    // maven { url "https://maven.aliyun.com/repository/public/" }
+    mavenCentral()
+    google()
+}
+
+/**
+ * 使用Groovy语言语法定义版本号变量
+ */
+def spring_boot_version = "2.7.5"
+def mybatis_plus_version = "3.1.2"
+def mysql_version = "8.0.21"
+def druid_version = "1.1.23"
+def fastjson_version = '2.0.17'
+def hutool_version = '5.7.14'
+def knife4j_version = '3.0.3'
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    compileOnly 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation "com.alibaba:fastjson:${fastjson_version}"
+    implementation "cn.hutool:hutool-all:${hutool_version}"
+    implementation "com.github.xiaoymin:knife4j-spring-boot-starter:${knife4j_version}"
+
+    implementation('org.springframework.boot:spring-boot-starter-data-redis')
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+[compileJava, javadoc, compileTestJava]*.options*.encoding = "UTF-8"
