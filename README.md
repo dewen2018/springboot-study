@@ -101,3 +101,6 @@
 	rediskey过期
 ## 47edition3exp
 	springboot3.0，使用graalvm，打包成可执行文件。
+## 48multi-cache
+	基于caffeine和redis缓存
+	caffeine没有网络开销，但是不能做到分布式缓存，redis刚好相反。
