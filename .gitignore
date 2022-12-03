@@ -1,3 +1,10 @@
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/**/gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
 # Compiled class file
 *.class
 
@@ -37,12 +44,18 @@ target/
 .settings
 .springBeans
 .sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
 ### NetBeans ###
 /nbproject/private/
@@ -56,4 +69,3 @@ build/
 
 ### VS Code ###
 .vscode/
-

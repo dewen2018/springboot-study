@@ -30,10 +30,16 @@ To create the image, run the following goal:
 
 ```
 $ ./mvnw spring-boot:build-image
+mvn '-Dmaven.test.skip=true' spring-boot:build-image
+mvn spring-boot:build-image
+
+mvn '-Dmaven.test.skip=true' clean package
 ```
 
 Then, you can run the app like any other container:
 
 ```
 $ docker run --rm -p 8080:8080 native:0.0.1-SNAPSHOT
+
+docker run --rm -p 8080:8080 rest-service:0.0.1-SNAPSHOT
 ```

@@ -1,7 +1,8 @@
 # spring-boot-study
-## 1.Spring Native
+## 1.native
 	Spring Native提供了Beta支持，用于使用GraalVM 原生镜像编译器将Spring应用程序编译为本机可执行文件，
 	以便提供本机部署选项，通常设计为打包在轻量级容器中。
+	idea中docker插件使用
 ## 2.hibernate-validator
 	Springboot优雅的进行字段校验
 ## 3.activiti
@@ -96,3 +97,7 @@
 	nocosredisson，redisson分布式锁，参考他人为自己写的lua,学到了
 ## 45smart-doc
 	升级版本至2.6.1，项目文档利器
+## 46rediskey
+	rediskey过期
+## 47edition3exp
+	springboot3.0，使用graalvm，打包成可执行文件。

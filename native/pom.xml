@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dewen</groupId>
     <artifactId>native</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>native</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -29,11 +29,11 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.experimental</groupId>
             <artifactId>spring-native</artifactId>
             <version>${spring-native.version}</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>
@@ -41,16 +41,48 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
+                <!--<configuration>
+                    &lt;!&ndash;<classifier>${classifier}</classifier>&ndash;&gt;
+                    &lt;!&ndash;Spring Boot 的 Spring Boot Buildpacks support 可以将 Spring Boot 应用程序打包成一个容器。
+                    native image buildpack 可以通过 BP_NATIVE_IMAGE 环境变量开启。&ndash;&gt;
                     <image>
+                        &lt;!&ndash; 指定使用dmikusa/graalvm-tiny这个镜像作为构建工具，来构建镜像 &ndash;&gt;
+                        &lt;!&ndash;<builder>dmikusa/graalvm-tiny</builder>&ndash;&gt;
                         <builder>paketobuildpacks/builder:tiny</builder>
+                        &lt;!&ndash;构建完镜像后发布&ndash;&gt;
+                        &lt;!&ndash;<publish>true</publish>&ndash;&gt;
+                        <name>dewen/${project.artifactId}:${project.version}</name>
                         <env>
                             <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+                            <BPE_DELIM_JAVA_TOOL_OPTIONS xml:space="preserve"> </BPE_DELIM_JAVA_TOOL_OPTIONS>
+                            <BPE_APPEND_JAVA_TOOL_OPTIONS>-Xms128m</BPE_APPEND_JAVA_TOOL_OPTIONS>
+                            <BPE_APPEND_JAVA_TOOL_OPTIONS>-Xmx128m</BPE_APPEND_JAVA_TOOL_OPTIONS>
+                            <BPE_APPEND_JAVA_TOOL_OPTIONS>-Xss256k</BPE_APPEND_JAVA_TOOL_OPTIONS>
+                            <BPE_APPEND_JAVA_TOOL_OPTIONS>-XX:ParallelGCThreads=2</BPE_APPEND_JAVA_TOOL_OPTIONS>
+                            <BPE_APPEND_JAVA_TOOL_OPTIONS>-XX:+PrintGCDetails</BPE_APPEND_JAVA_TOOL_OPTIONS>
                         </env>
                     </image>
+                    <docker>
+                        <dockerHost>http://192.168.111.148:2375</dockerHost>
+                        &lt;!&ndash;docker中央信息&ndash;&gt;
+                        &lt;!&ndash;<publishRegistry>
+                            <url>${dockerhub.url}</url>
+                            <username>${env.DOCKERHUB_USERNAME}</username>
+                            <password>${env.DOCKERHUB_PASSWORD}</password>
+                        </publishRegistry>&ndash;&gt;
+                    </docker>
+                </configuration>-->
+            </plugin>
+            <!--跳过单元测试-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--Spring AOT 插件执行代码的提前转换，用以修复 native image 的兼容性。-->
+            <!--<plugin>
                 <groupId>org.springframework.experimental</groupId>
                 <artifactId>spring-aot-maven-plugin</artifactId>
                 <version>${spring-native.version}</version>
@@ -68,10 +100,48 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
+
+            <!--使用docker-maven-plugin插件-->
+            <!--<plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                &lt;!&ndash;将插件绑定在某个phase执行&ndash;&gt;
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        &lt;!&ndash;将插件绑定在package这个phase上。也就是说，用户只需执行mvn package ，就会自动执行mvn docker:build&ndash;&gt;
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    &lt;!&ndash;指定生成的镜像名&ndash;&gt;
+                    &lt;!&ndash;${docker.image.prefix}&ndash;&gt;
+                    <imageName>dewen/${project.artifactId}</imageName>
+                    &lt;!&ndash;指定远程 docker api地址 就是上面的服务器ip&ndash;&gt;
+                    <dockerHost>http://192.168.111.148:2375</dockerHost>
+                    &lt;!&ndash;设置目录，该目录下放Dockerfile&ndash;&gt;
+                    <dockerDirectory>${project.basedir}</dockerDirectory>
+                     &lt;!&ndash; 这里是复制 jar 包到 docker 容器指定目录配置&ndash;&gt;
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            &lt;!&ndash;jar 包所在的路径  此处配置的 即对应 target 目录&ndash;&gt;
+                            <directory>${project.build.directory}</directory>
+                            &lt;!&ndash;用于指定需要复制的文件 需要包含的 jar包 ，这里对应的是 Dockerfile中添加的文件名 &ndash;&gt;
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>-->
         </plugins>
     </build>
-    <repositories>
+    <!--Maven Repository-->
+    <!--<repositories>
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
@@ -87,6 +157,6 @@
             <name>Spring Snapshots</name>
             <url>https://repo.spring.io/snapshot</url>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories>-->
 
 </project>
