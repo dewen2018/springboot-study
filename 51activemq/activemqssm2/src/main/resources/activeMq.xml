@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:amq="http://activemq.apache.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+    <!-- 加载activemq配置文件 -->
+    <context:property-placeholder location="classpath:activemq.properties" ignore-unresolvable="true" />
+    <!--更新一下，配置可以写在properties文件中-->
+    <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="${activemq.connectType}://${activemq.brokerURL}:${activemq.port}" />
+        <property name="userName" value="${activemq.username}" />
+        <property name="password" value="${activemq.password}" />
+        <!-- 是否异步发送消息 -->
+        <property name="useAsyncSend" value="true" />
+        <property name="alwaysSessionAsync" value="false" />
+    </bean>
+
+    <!-- 设置发送连接池,提高性能 -->
+<!--    <bean id="JmsSenderFactory" class="org.apache.activemq.pool.PooledConnectionFactory"-->
+<!--          destroy-method="stop">-->
+<!--        <property name="connectionFactory" ref="amqConnectionFactory" />-->
+<!--        <property name="maxConnections" value="20"></property>-->
+<!--    </bean>-->
+
+    <!-- 设置接收连接池,提高性能 -->
+<!--    <bean id="JmsReveiverFactory" class="org.apache.activemq.pool.PooledConnectionFactory">-->
+<!--        <property name="connectionFactory" ref="amqConnectionFactory" />-->
+<!--        <property name="maxConnections" value="10"></property>-->
+<!--    </bean>-->
+
+    <!-- 消息传输监听器 处理网络及服务器异常 -->
+    <!--     <property name="transportListener">
+            <bean class="cn.mayongfa.activemq.ActiveMQTransportListener" />
+        </property> -->
+    <!-- 配置JMS连接工长 -->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+        <constructor-arg name="targetConnectionFactory" ref="amqConnectionFactory" />
+        <property name="sessionCacheSize" value="100" />
+    </bean>
+    <!-- 定义消息队列（Queue） -->
+    <!-- 设置消息队列的名字 -->
+<!--    <bean id="demoQueueDestination" class="org.apache.activemq.command.ActiveMQQueue">-->
+<!--        <constructor-arg>-->
+<!--            <value>${activemq.virtual.host}</value>-->
+<!--        </constructor-arg>-->
+<!--    </bean>-->
+
+    <!-- 配置JMS模板（Queue），Spring提供的JMS工具类，它发送、接收消息。 -->
+<!--    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">-->
+<!--        <property name="connectionFactory" ref="connectionFactory" />-->
+<!--        <property name="defaultDestination" ref="demoQueueDestination" />-->
+<!--        &lt;!&ndash;JmsTemplate的接收是阻塞式的接收，默认会一直阻塞等待，直到接收到了消息。也可以设置一个最长的等待时间参数，超过这个时间，接收的方法将得到null的结果。  &ndash;&gt;-->
+<!--        <property name="receiveTimeout" value="10000" />-->
+<!--        &lt;!&ndash; true是topic，false是queue，默认是false，此处显示写出false。非pub/sub模型（发布/订阅），即队列模式 &ndash;&gt;-->
+<!--        <property name="pubSubDomain" value="false" />-->
+<!--        &lt;!&ndash; deliveryMode, priority, timeToLive 的开关，要生效，必须配置为true，默认false&ndash;&gt;-->
+<!--        <property name="explicitQosEnabled" value="true" />-->
+<!--        &lt;!&ndash; 发送模式  DeliveryMode.NON_PERSISTENT=1:非持久 ; DeliveryMode.PERSISTENT=2:持久&ndash;&gt;-->
+<!--        <property name="deliveryMode" value="1" />-->
+<!--        &lt;!&ndash;在发送时，可以设置消息的存活时间，默认为永久有效。  &ndash;&gt;-->
+<!--        &lt;!&ndash; <property name="timeToLive" value="5000" /> &ndash;&gt;&lt;!&ndash;此项配置有问题  &ndash;&gt;-->
+<!--        &lt;!&ndash; 消息应答方式-->
+<!--            Session.AUTO_ACKNOWLEDGE  消息自动签收-->
+<!--            Session.CLIENT_ACKNOWLEDGE  客户端调用acknowledge方法手动签收-->
+<!--            Session.DUPS_OK_ACKNOWLEDGE 不必必须签收，消息可能会重复发送-->
+<!--            JMS规范的ack消息确认机制有一下四种，定于在session对象中：-->
+<!--    AUTO_ACKNOWLEDGE = 1 ：自动确认-->
+<!--    CLIENT_ACKNOWLEDGE = 2：客户端手动确认-->
+<!--    DUPS_OK_ACKNOWLEDGE = 3： 自动批量确认-->
+<!--    SESSION_TRANSACTED = 0：事务提交并确认-->
+<!--    但是在activemq补充了一个自定义的ACK模式:-->
+<!--    INDIVIDUAL_ACKNOWLEDGE = 4：单条消息确认-->
+<!--            &ndash;&gt;-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash; 配置消息队列监听者（Queue） &ndash;&gt;-->
+<!--    <bean id="queueMessageListener" class="com.dewen.filter.QueueMessageListener" />-->
+
+<!--    &lt;!&ndash; 显示注入消息监听容器（Queue），配置连接工厂，监听的目标是demoQueueDestination，监听器是上面定义的监听器 &ndash;&gt;-->
+<!--    <bean id="queueListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">-->
+<!--        <property name="connectionFactory" ref="connectionFactory" />-->
+<!--        <property name="destination" ref="demoQueueDestination" />-->
+<!--        <property name="messageListener" ref="queueMessageListener" />-->
+<!--    </bean>-->
+    <!-- 定义JmsTemplate的Queue类型 -->
+    <bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
+        <constructor-arg ref="connectionFactory" />
+        <!-- 非pub/sub模型（发布/订阅），即队列模式 -->
+        <property name="pubSubDomain" value="false" />
+    </bean>
+
+    <!-- 定义JmsTemplate的Topic类型 -->
+    <bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
+        <constructor-arg ref="connectionFactory" />
+        <!-- pub/sub模型（发布/订阅） -->
+        <property name="pubSubDomain" value="true" />
+    </bean>
+</beans>
