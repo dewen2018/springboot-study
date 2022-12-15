@@ -1,0 +1,19 @@
+topinfo:
+  mongodb:
+    base:
+      #  mongos的地址和端口
+      uri: mongodb://192.168.90.225:20000,192.168.90.226:20000,192.168.90.227:20000
+      database: topinfo_base
+    warn:
+      #  mongos的地址和端口
+      uri: mongodb://192.168.90.225:20000,192.168.90.226:20000,192.168.90.227:20000
+      database: topinfo_warn
+
+
+
+
+#username和password中含有“:”或“@”需要进行URLEncoder编码
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://test_user:pass%40123@192.168.1.1:27017,192.168.1.2:27017,192.168.1.3:27017/tdb
