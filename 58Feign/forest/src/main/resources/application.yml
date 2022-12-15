@@ -1,0 +1,14 @@
+#forest:
+#  ssl-key-stores:
+#    - id: pay-keystore
+#      file: test.keystore
+#      keystore-pass: 123456
+#      cert-pass: 123456
+#      protocols: SSLv3
+
+forest:
+  timeout: 3333
+  logEnabled: true
+  variables:
+    giteeUrl: https://gitee.com
+    idServiceUrl: https://www.12306.cn

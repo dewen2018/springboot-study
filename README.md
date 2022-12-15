@@ -121,3 +121,5 @@
 	分布式job demo
 ## 56i18n
 	thymeleaf i18国际化demo
+## 57LogAspect
+## 58Feign
