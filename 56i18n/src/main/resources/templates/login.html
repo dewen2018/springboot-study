@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<a href="?lang=en_US">English</a> | <a href="?lang=zh_CN">中文</a>
+<h1 th:text="#{login.tip}">请登录</h1>
+<form action="login" method="post">
+    <table>
+        <tr>
+            <td th:text="#{login.username}">用户</td>
+            <td><input type="text" name="loginName" id="loginName"/></td>
+        </tr>
+        <tr>
+            <td th:text="#{login.password}">密码</td>
+            <td><input type="text" name="password" id="password"/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="登录" th:value="#{login.btn}"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+
+</html>

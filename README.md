@@ -104,3 +104,20 @@
 ## 48multi-cache
 	基于caffeine和redis缓存
 	caffeine没有网络开销，但是不能做到分布式缓存，redis刚好相反。
+## 49proguard
+	代码混淆，降低反编译之后的代码可读性，不是代码安全。。
+## 50resilience4j
+	Resilience4j is a lightweight fault tolerance library designed for functional programming.
+	Resilience4j 是一个轻量级的容错组件，其灵感来自于 Hystrix，但主要为 Java 8 和函数式编程所设计。
+## 51activemq
+	springboot版本和ssm版本，spring使用ActivateMQ(代码可能比较旧，19年写的)
+## 52dataway
+	dataway
+## 53cluster
+	集群搭建后的测试代码：MongoDBCLuster（未验证），RedisCLuster（验证可用）
+## 54minio
+	springboot操作minio
+## 55elastic-job-lite
+	分布式job demo
+## 56i18n
+	thymeleaf i18国际化demo
