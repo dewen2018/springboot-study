@@ -1,0 +1,138 @@
+management.endpoints.web.exposure.include: '*'
+management.endpoint.health.show-details: always
+
+management.health.diskspace.enabled: false
+management.health.circuitbreakers.enabled: true
+management.health.ratelimiters.enabled: false
+
+info:
+  name: ${spring.application.name}
+  description: resilience4j demo
+  environment: ${spring.profiles.active}
+  version: ${revision}
+management.metrics.tags.application: ${spring.application.name}
+management.metrics.distribution.percentiles-histogram.http.server.requests: true
+management.metrics.distribution.percentiles-histogram.resilience4j.circuitbreaker.calls: true
+
+#resilience4j.circuitbreaker.metrics.use_legacy_binder: true
+
+# CircuitBreaker、Retry、RateLimiter、Bulkhead、Thread pool bulkhead 和 TimeLimiter
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      # 滑动窗口大小
+      slidingWindowSize: 10
+      # 每个滑块周期内，至少要满足多少调用次数，否则即使达到了错误率，也不会进行状态的变更
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s
+      # 失败率，调用失败达到该阈值，断路器会被打开，默认为50%
+      failureRateThreshold: 50
+      # 滑动窗口类型，默认为累计计数
+      slidingWindowType: COUNT_BASED
+      eventConsumerBufferSize: 10
+      # 该被纳入错误率计算的异常，默认为空
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+      # 不该被纳入错误率计算的异常，默认为空
+      ignoreExceptions:
+        - com.dewen.exception.BusinessException
+    shared:
+      slidingWindowSize: 100
+      permittedNumberOfCallsInHalfOpenState: 30
+      waitDurationInOpenState: 1s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      ignoreExceptions:
+        - com.dewen.exception.BusinessException
+  instances:
+    backendA:
+      baseConfig: default
+    backendB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      # throwable -> true,异常预测类，默认异常都为true,即都该被纳入错误率
+      recordFailurePredicate: com.dewen.exception.RecordFailurePredicate
+
+resilience4j.retry:
+  configs:
+    default:
+      maxAttempts: 3
+      waitDuration: 100
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+      ignoreExceptions:
+        - com.dewen.exception.BusinessException
+  instances:
+    backendA:
+      baseConfig: default
+    backendB:
+      baseConfig: default
+
+resilience4j.bulkhead:
+  configs:
+    default:
+      maxConcurrentCalls: 100
+  instances:
+    backendA:
+      maxConcurrentCalls: 10
+    backendB:
+      maxWaitDuration: 10ms
+      maxConcurrentCalls: 20
+
+resilience4j.thread-pool-bulkhead:
+  configs:
+    default:
+      maxThreadPoolSize: 4
+      coreThreadPoolSize: 2
+      queueCapacity: 2
+  instances:
+    backendA:
+      baseConfig: default
+    backendB:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
+
+resilience4j.ratelimiter:
+  configs:
+    default:
+      registerHealthIndicator: true
+      # 在每个周期内的令牌数
+      limitForPeriod: 1
+      # 令牌刷新的周期，以纳秒为单位
+      limitRefreshPeriod: 10s
+      # 当请求被限流时，线程等待的时间
+      timeoutDuration: 0
+      eventConsumerBufferSize: 100
+  instances:
+    # 限流器名称
+    backendA:
+      baseConfig: default
+    backendB:
+      limitForPeriod: 6
+      limitRefreshPeriod: 500ms
+      timeoutDuration: 3s
+# 限制服务调用的时间，超时则返回异常或执行fallback方法，只能用于Reactor和RxJava，
+# springcloud中支持webclient调用外部服务，不支持restTemplate
+resilience4j.timelimiter:
+  configs:
+    default:
+      cancelRunningFuture: true
+      timeoutDuration: 2s
+  instances:
+    backendA:
+      baseConfig: default
+    backendB:
+      baseConfig: default
