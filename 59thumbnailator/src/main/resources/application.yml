@@ -1,0 +1,35 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /node2
+
+#logging:
+#  level:
+#    org:
+#      apache:
+#        http: TRACE
+#      elasticsearch:
+#        client: DEBUG
+
+# 不开启的话，排序不生效
+knife4j:
+  enable: true
+#  production: false
+  basic:
+    enable: false
+    username: dewen
+    password: dewen
+  setting:
+    # 禁用默认的Footer显示，如果要自定义的话该属性必须设置为false,否则不会生效
+    enableFooter: false
+    # 该属性为Boolean值,默认false，如果开发者要自定义Footer内容,该选项设置为true
+    enableFooterCustom: true
+    # 最终在Ui界面底部显示的Footer内容，支持Markdown格式
+    footerCustomContent: Apache License 2.0 | Copyright  2022-[Dewen's Project](https://github.com/dewen2018)
+    # enableOpenApi: false
+
+spring:
+  mvc:
+    pathmatch:
+      # 因为Springfox 使用的路径匹配是基于AntPathMatcher的，而Spring Boot 2.6.X使用的是PathPatternMatcher。
+      matching-strategy: ant_path_matcher

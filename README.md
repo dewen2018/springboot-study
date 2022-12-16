@@ -123,3 +123,5 @@
 	thymeleaf i18国际化demo
 ## 57LogAspect
 ## 58Feign
+## 59thumbnailator
+	thumbnailator截图，旋转，水印，缩放
