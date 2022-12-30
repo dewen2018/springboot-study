@@ -1,0 +1,79 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /node2
+
+#logging:
+#  level:
+#    org:
+#      apache:
+#        http: TRACE
+#      elasticsearch:
+#        client: DEBUG
+
+# 不开启的话，排序不生效
+knife4j:
+  enable: true
+  #  production: false
+  basic:
+    enable: false
+    username: dewen
+    password: dewen
+  setting:
+    # 禁用默认的Footer显示，如果要自定义的话该属性必须设置为false,否则不会生效
+    enableFooter: false
+    # 该属性为Boolean值,默认false，如果开发者要自定义Footer内容,该选项设置为true
+    enableFooterCustom: true
+    # 最终在Ui界面底部显示的Footer内容，支持Markdown格式
+    footerCustomContent: Apache License 2.0 | Copyright  2022-[Dewen's Project](https://github.com/dewen2018)
+    # enableOpenApi: false
+
+spring:
+  mvc:
+    pathmatch:
+      # 因为Springfox 使用的路径匹配是基于AntPathMatcher的，而Spring Boot 2.6.X使用的是PathPatternMatcher。
+      matching-strategy: ant_path_matcher
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3307/dewen_anything?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: root
+      filters:
+        commons-log.connection-logger-name: stat,wall,log4j
+      max-active: 16
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      # validation-query: select 'x'
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*Mapper.xml
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 删除前
+      logic-not-delete-value: 1
+      # 删除后
+      logic-delete-value: 0

@@ -1,0 +1,3 @@
+ResourceScriptSource：在 resources 下面写groovy类
+StaticScriptSource：把groovy类代码放进XML里
+DatabaseScriptSource：把groovy类代码放进数据库中

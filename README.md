@@ -129,3 +129,5 @@
 	百度uid算法
 ## 61reactive
 	webflux mysql r2dbc
+## 62groovy
+	动态编程

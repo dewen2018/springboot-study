@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/lang
+                           http://www.springframework.org/schema/lang/spring-lang.xsd">
+
+    <lang:groovy id="helloService">
+        <lang:inline-script>
+            import com.dewen.service.GroovyService
+
+            class HelloServiceImpl implements GroovyService {
+
+                String name;
+
+                @Override
+                String sayHello() {
+                    return "Hello $name. Welcome to static script in Groovy.";
+                }
+
+                @Override
+                String sayHello(String name) {
+                    return "Hello $name. Welcome to static script in Groovy.";
+                }
+            }
+        </lang:inline-script>
+        <lang:property name="name" value="maple"/>
+    </lang:groovy>
+</beans>
