@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3307/dewen_anything?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: root
+
+#uid:
+#  enableCache: true
+#  timeBits: 31
+#  workerBits: 17
+#  seqBits: 15

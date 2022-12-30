@@ -1,0 +1,29 @@
+spring:
+  r2dbc:
+    name: r2dbc
+    url: r2dbc:mysql://127.0.0.1:3307/dewen_webflux?serverTimezone=GMT%2B8&characterEncoding=UTF-8
+    username: root
+    password: root
+    pool:
+      validation-query: SELECT 1
+      enabled: true
+
+server:
+  port: 80
+
+# 不开启的话，排序不生效
+knife4j:
+  # enable: true
+  # production: false
+  basic:
+    enable: false
+    username: dewen
+    password: dewen
+  setting:
+    # 禁用默认的Footer显示，如果要自定义的话该属性必须设置为false,否则不会生效
+    enableFooter: false
+    # 该属性为Boolean值,默认false，如果开发者要自定义Footer内容,该选项设置为true
+    enableFooterCustom: true
+    # 最终在Ui界面底部显示的Footer内容，支持Markdown格式
+    footerCustomContent: Apache License 2.0 | Copyright  2022-[Dewen's Project](https://github.com/dewen2018)
+    # enableOpenApi: false

@@ -125,3 +125,7 @@
 ## 58Feign
 ## 59thumbnailator
 	thumbnailator截图，旋转，水印，缩放
+## 60baiduuidgenerator
+	百度uid算法
+## 61reactive
+	webflux mysql r2dbc
