@@ -1,0 +1,23 @@
+server:
+  port: 8081
+
+netty:
+  host: 127.0.0.1
+  port: 9000
+  path: /ws
+  server-port: 9000
+
+spring:
+  application:
+    name: app
+  thymeleaf:
+    cache: false
+    checktemplatelocation: true
+    enabled: true
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+#  resources:
+#    static-locations: classpath:/templates/
+

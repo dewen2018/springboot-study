@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .video {
+            width: 668px;
+            height: 376px;
+            position: relative;
+            background-color: black;
+            -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKIHdpZHRoPSI2NjhweCIgc3R5bGU9InRyYW5zZm9ybTpzY2FsZSgxLDEuMDAxKTsiIGhlaWdodD0iMzc1Ljc1cHgiIHZpZXdCb3g9IjAgMCAzMjAuMDAwMDAwIDE4MC4wMDAwMDAiCiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0Ij4KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsMTgwLjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIKZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSJub25lIj4KPHBhdGggZD0iTTAgOTA1IGwwIC04OTUgNzA4IDAgNzA3IDAgMSAxNTMgYzAgODMgNCAxODUgOCAyMjUgNyA2NyA2IDcyIC0xMiA3MiAtMTEgMAotMjUgNyAtMzIgMTUgLTcgOCAtMTggMTUgLTI1IDE1IC0xOSAwIC0yNiAyNiAtMzIgMTEwIC0zIDQ5IC0xNSAxMDEgLTM0IDE0OQotMTYgNDAgLTI5IDg3IC0yOSAxMDMgMCAzNCA1NSAxNDcgNzUgMTU1IDggMyAxNSAxNSAxNSAyNyAwIDI1IDYxIDE1NiA5MSAxOTUKMTEgMTQgMzggNDAgNjAgNTggNDYgMzcgOTkgMTA5IDk5IDEzNyAwIDExIC02IDI3IC0xNCAzNSAtMjYgMzAgLTg2IDE1MyAtODYKMTc3IDAgMTMgMTYgNDEgMzYgNjQgbDM2IDQwIDEwNCAwIDEwNCAwIDM4IC0zNCBjMzIgLTMwIDM3IC00MCAzNiAtNzggLTEgLTI1Ci0xMiAtNjQgLTI3IC05NCAtMjUgLTUwIC0yNSAtNTAgLTcgLTkxIDEzIC0yOSAzNiAtNTMgNzcgLTgxIDE0NyAtMTAxIDIyNgotMjQzIDI0MCAtNDI4IDcgLTEwMiAtNiAtMTQ4IC01MCAtMTcwIC01NiAtMjggLTY3IC00NCAtNjcgLTkxIDAgLTUwIC0yMSAtOTcKLTUwIC0xMTMgLTE4IC0xMCAtMjAgLTIxIC0yMCAtMTQ1IDAgLTk3IC01IC0xNTYgLTIwIC0yMTcgLTEwIC00NiAtMjIgLTEwNwotMjYgLTEzNSBsLTcgLTUzIDY1MiAwIDY1MSAwIDAgODk1IDAgODk1IC0xNjAwIDAgLTE2MDAgMCAwIC04OTV6Ii8+CjwvZz4KPC9zdmc+Cg==") ;
+            -webkit-mask-size: 668px 376px;
+        }
+        .bullet {
+            position: absolute;
+            font-size: 20px;
+            color: white;
+            animation: ani 5s linear infinite;
+        }
+        .showBullet {
+            position: absolute;
+            font-size: 20px;
+            color: red;
+            animation: show 5s linear infinite;
+        }
+
+        @keyframes ani {
+            0% {
+                transform: translateX(668px);
+            }
+            100% {
+                transform: translateX(-668px);
+            }
+        }
+
+        @keyframes show {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="video">
+    <div class="bullet" style="left: 100px; top: 120px;">鸡你太美，鸡你太美</div>
+    <div class="bullet" style="left: 200px; top: 60px;">小黑子，哥哥下蛋你别吃</div>
+    <div class="bullet" style="left: 500px; top: 60px;">食不食油饼</div>
+    <div class="bullet" style="left: 300px; top: 140px;">鸡哥</div>
+    <div class="bullet" style="left: 400px; top: 100px;">铁山靠</div>
+    <div class="showBullet" style="left: 320px; top: 20px;">完结撒花</div>
+    <div class="showBullet" style="left: 340px; top: 50px;">泪目</div>
+</div>
+</body>
+</html>
