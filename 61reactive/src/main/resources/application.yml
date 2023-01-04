@@ -1,7 +1,7 @@
 spring:
   r2dbc:
     name: r2dbc
-    url: r2dbc:mysql://127.0.0.1:3307/dewen_webflux?serverTimezone=GMT%2B8&characterEncoding=UTF-8
+    url: r2dbc:mysql://127.0.0.1:3307/dewen_webflux?serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
     pool:
