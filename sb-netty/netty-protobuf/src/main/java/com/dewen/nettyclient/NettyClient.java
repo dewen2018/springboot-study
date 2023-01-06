@@ -1,6 +1,6 @@
 package com.dewen.nettyclient;
 
-import com.dewen.protocol.protobuf.MessageBase;
+import com.dewen.protobuf.MessageInfo;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -19,36 +19,47 @@ import java.util.concurrent.TimeUnit;
 @Component
 @Slf4j
 public class NettyClient {
-    private EventLoopGroup group = new NioEventLoopGroup();
-    @Value("${server.port}")
+    @Value("${netty.port}")
     private int port;
-    @Value("${server.host}")
+    @Value("${netty.host}")
     private String host;
+    private EventLoopGroup group = new NioEventLoopGroup();
+
     private SocketChannel socketChannel;
 
-    public void sendMsg(MessageBase.Message message) {
+    public void sendMsg(MessageInfo.Message message) {
         socketChannel.writeAndFlush(message);
     }
 
     @PostConstruct
     public void start() {
-        Bootstrap bootstrap = new Bootstrap();
-        bootstrap.group(group)
-                .channel(NioSocketChannel.class)
-                .remoteAddress(host, port)
-                .option(ChannelOption.SO_KEEPALIVE, true)
-                .option(ChannelOption.TCP_NODELAY, true)
-                .handler(new NettyClientHandlerInitilizer());
-        ChannelFuture future = bootstrap.connect();
-        //客户端断线重连逻辑：第一种情况实现
-        future.addListener((ChannelFutureListener) future1 -> {
-            if (future1.isSuccess()) {
-                log.info("连接Netty服务端成功");
-            } else {
-                log.info("连接失败，进行断线重连");
-                future1.channel().eventLoop().schedule(() -> start(), 20, TimeUnit.SECONDS);
+        new Thread(() -> {
+            ChannelFuture future = null;
+
+            try {
+                Bootstrap bootstrap = new Bootstrap();
+                bootstrap.group(group)
+                        .channel(NioSocketChannel.class)
+                        .option(ChannelOption.SO_KEEPALIVE, true)
+                        .option(ChannelOption.TCP_NODELAY, true)
+                        .remoteAddress(host, port)
+                        .handler(new NettyClientHandlerInitilizer());
+                // future = bootstrap.connect(host, port);
+                future = bootstrap.connect()
+                        //客户端断线重连逻辑：第一种情况实现
+                        .addListener((ChannelFutureListener) futureListener -> {
+                            if (futureListener.isSuccess()) {
+                                log.info("连接Netty服务端成功");
+                            } else {
+                                log.info("连接失败，进行断线重连");
+                                futureListener.channel().eventLoop().schedule(() -> start(), 20, TimeUnit.SECONDS);
+                            }
+                        });
+                socketChannel = (SocketChannel) future.channel();
+                future.channel().closeFuture().sync();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
-        socketChannel = (SocketChannel) future.channel();
+        }).start();
     }
 }

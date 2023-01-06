@@ -1,12 +1,13 @@
 package com.dewen.nettyclient;
 
-import com.dewen.protocol.protobuf.MessageBase;
+import com.dewen.protobuf.MessageInfo;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class NettyClientHandler extends SimpleChannelInboundHandler<MessageBase.Message> {
+public class NettyClientHandler extends SimpleChannelInboundHandler<MessageInfo.Message> {
+
 
     /**
      * 如果服务端发生消息给客户端，下面方法进行接收消息
@@ -16,21 +17,21 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<MessageBase.
      * @throws Exception
      */
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, MessageBase.Message msg) throws Exception {
-        log.info("客户端收到消息：{}",msg.toString());
-    }
-
-    /**
-     * 处理异常, 一般将实现异常处理逻辑的Handler放在ChannelPipeline的最后
-     * 这样确保所有入站消息都总是被处理，无论它们发生在什么位置，下面只是简单的关闭Channel并打印异常信息
-     *
-     * @param ctx
-     * @param cause
-     * @throws Exception
-     */
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
-        ctx.close();
+    protected void channelRead0(ChannelHandlerContext ctx, MessageInfo.Message msg) throws Exception {
+        log.info("客户端收到消息：{}", msg.toString());
+        // 如果不是protobuf类型的数据
+        if (!(msg instanceof MessageInfo.Message)) {
+            System.out.println("未知数据!" + msg);
+            return;
+        }
+        try {
+            // 得到protobuf的数据，进行相应的业务处理。。。
+            MessageInfo.Message.Builder message = MessageInfo.Message.newBuilder()
+                    .setCmd(MessageInfo.Message.CommandType.HEARTBEAT_REQUEST);
+            ctx.writeAndFlush(message);
+            System.out.println("成功发送给服务端!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

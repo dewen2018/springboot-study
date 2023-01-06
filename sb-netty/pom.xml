@@ -11,8 +11,15 @@
 	<groupId>com.dewen</groupId>
 	<artifactId>sb-netty</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>sb-netty</name>
 	<description>Demo project for Spring Boot</description>
+
+	<modules>
+<!--		<module>imdemo</module>-->
+<!--		<module>rpcdemo</module>-->
+		<module>netty-protobuf</module>
+	</modules>
 	<properties>
 		<java.version>11</java.version>
 		<grpc.version>1.6.1</grpc.version>
@@ -76,29 +83,6 @@
 						</exclude>
 					</excludes>
 				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.xolstice.maven.plugins</groupId>
-				<artifactId>protobuf-maven-plugin</artifactId>
-				<version>0.5.0</version>
-				<configuration>
-					<protocArtifact>
-						com.google.protobuf:protoc:3.1.0:exe:${os.detected.classifier}
-					</protocArtifact>
-					<pluginId>grpc-java</pluginId>
-					<pluginArtifact>
-						io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
-					</pluginArtifact>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>compile-custom</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

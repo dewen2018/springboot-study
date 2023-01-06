@@ -1,0 +1,23 @@
+//protobuf语法有 proto2和proto3两种，这里指定 proto3
+// 生成命令  .\protoc.exe --java_out=D:\codes\code2\springboot-study\sb-netty\netty-protobuf\src\main\java .\message.proto
+syntax = "proto3";
+// 生成的包名
+option java_package = "com.dewen.protobuf";
+//生成的java名
+option java_outer_classname = "MessageInfo";
+
+message Message {
+  string      requestId = 1;
+  string      name = 2;
+  // int32 id = 1;
+  CommandType cmd = 3;
+  string      content = 4;
+  enum CommandType {
+    // 常规业务消息
+    NORMAL = 0;
+    // 客户端心跳消息
+    HEARTBEAT_REQUEST = 1;
+    // 服务端心跳消息
+    HEARTBEAT_RESPONSE = 2;
+  }
+}

@@ -1,0 +1,59 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /node2
+
+#logging:
+#  level:
+#    org:
+#      apache:
+#        http: TRACE
+#      elasticsearch:
+#        client: DEBUG
+
+# 不开启的话，排序不生效
+knife4j:
+  enable: true
+  #  production: false
+  basic:
+    enable: false
+    username: dewen
+    password: dewen
+  setting:
+    # 禁用默认的Footer显示，如果要自定义的话该属性必须设置为false,否则不会生效
+    enableFooter: false
+    # 该属性为Boolean值,默认false，如果开发者要自定义Footer内容,该选项设置为true
+    enableFooterCustom: true
+    # 最终在Ui界面底部显示的Footer内容，支持Markdown格式
+    footerCustomContent: Apache License 2.0 | Copyright  2022-[Dewen's Project](https://github.com/dewen2018)
+    # enableOpenApi: false
+
+spring:
+  application:
+    name: dewen
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3307/dewen_exp?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&autoReconnect=true
+    username: root
+    password: root
+
+#logging配置
+logging:
+  level:
+    com.dewen: debug
+  file:
+    name: log/${spring.application.name}.log
+#    path:
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    db-config:
+      logic-delete-field-name: is_del
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+    banner: true

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dewen.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.dewen.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, username, open_id, `password`, email, mobile, create_time, expire_time, `status`
+    </sql>
+
+<!--    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.dewen.entity.User">-->
+<!--        select-->
+<!--        <include refid="Base_Column_List"></include>-->
+<!--        from sys_user-->
+<!--        <where>-->
+<!--            deleted=1-->
+<!--            <if test="vo.username!=null and vo.username!=''">-->
+<!--                AND username LIKE concat('%',#{vo.username},'%')-->
+<!--            </if>-->
+<!--            <if test="vo.nickName!=null and vo.nickName!=''">-->
+<!--                AND nick_name LIKE concat('%',#{vo.nickName},'%')-->
+<!--            </if>-->
+<!--            <if test="vo.startTime!=null and vo.startTime!=''">-->
+<!--                AND create_time &gt;= #{vo.startTime}-->
+<!--            </if>-->
+<!--            <if test="vo.endTime!=null and vo.endTime!=''">-->
+<!--                AND create_time &lt;= #{vo.endTime}-->
+<!--            </if>-->
+<!--            <if test="vo.userId!=null and vo.userId!='' ">-->
+<!--                AND id=#{vo.userId}-->
+<!--            </if>-->
+<!--            <if test="vo.status!=null and vo.status!='' or vo.status==0 ">-->
+<!--                AND `status`=#{vo.status}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    <select id="selectUserInfoByDeptIds" resultMap="BaseResultMap">-->
+<!--        select-->
+<!--        <include refid="Base_Column_List"></include>-->
+<!--        from sys_user-->
+<!--        where dept_id in-->
+<!--        <foreach collection="list" open="(" close=")" separator="," item="item">-->
+<!--            #{item}-->
+<!--        </foreach>-->
+<!--        and deleted=1-->
+<!--    </select>-->
+
+
+<!--    <update id="deletedUsers" parameterType="com.pqkj.entity.SysUser">-->
+<!--        update sys_user-->
+<!--        <set>-->
+<!--            deleted = 0,-->
+<!--            <if test="sysUser.updateId != null">-->
+<!--                update_id = #{sysUser.updateId,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="sysUser.updateTime != null">-->
+<!--                update_time = #{sysUser.updateTime,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id in-->
+<!--        <foreach collection="list" open="(" close=")" separator="," item="item">-->
+<!--            #{item}-->
+<!--        </foreach>-->
+<!--    </update>-->
+</mapper>
