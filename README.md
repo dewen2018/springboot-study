@@ -90,6 +90,8 @@
 	mapstruct
 ## 42datamask
 	mybatis数据脱敏
+	加解密
+	拦截器及typeHandler
 ## 43flyway
 	Flyway，自动化实现数据库版本控制
 ## 44seckill
@@ -131,3 +133,5 @@
 	webflux mysql r2dbc
 ## 62groovy
 	动态编程
+## 63ldap
+	ldap 未完成
