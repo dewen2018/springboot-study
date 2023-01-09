@@ -1,0 +1,40 @@
+# 表示构建一个 user 数据结构
+type Student{
+    id:Int!
+    name:String!
+    age:Int!
+}
+
+# 查询相关接口
+type Query{
+    findAll:[Student!]
+    findById(id:Int!): Student
+    findByName(name: String!): [Student]
+    findAllByPage(pageNo:Int!,pageSize:Int!):PageResult!
+    # students(first: Int, after: String): StudentConnection @connection(for: "Student")
+    # 异步
+    getStudents:[Student]
+
+    userList:[User!]
+    user(username: String!, nickname: String!): User
+    users(input: UserInput): [User]
+
+
+    findBookById(id:Int!): Book
+}
+
+type Mutation {
+    addStudent(input: StudentDTO!): Result
+}
+
+input StudentDTO  {
+    name: String!
+    age: Int!
+}
+
+type PageResult{
+    items:[Student]!
+    pageNo:Int!
+    pageSize:Int!
+    totalCount:Int!
+}

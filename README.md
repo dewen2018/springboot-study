@@ -135,3 +135,5 @@
 	动态编程
 ## 63ldap
 	ldap 未完成
+## 64graphql
+	mybatis crup,异步处理
